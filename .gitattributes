@@ -1,0 +1,68 @@
+# Line endings
+#
+# Normalize everything to LF in the repository, and check out LF everywhere
+# including Windows. LF is the right default here because Docker, shell
+# scripts, and Python tooling all break on CRLF.
+#
+# Without this, Git warned on every checkout that LF "will be replaced by
+# CRLF", which makes diffs noisy for anyone working across platforms.
+* text=auto eol=lf
+
+# Declare text types explicitly, so detection never has to guess.
+*.md        text
+*.txt       text
+*.json      text
+*.jsonc     text
+*.yaml      text
+*.yml       text
+*.toml      text
+*.cfg       text
+*.ini       text
+*.py        text
+*.pyi       text
+*.ts        text
+*.tsx       text
+*.js        text
+*.jsx       text
+*.mjs       text
+*.cjs       text
+*.css       text
+*.html      text
+*.sql       text
+*.sh        text
+Dockerfile  text
+*.dockerfile text
+.gitignore  text
+.gitattributes text
+
+# Never touch binaries.
+#
+# The eval harness holds reference recordings and models/ holds downloaded
+# weights. Without this, text=auto could theoretically mangle them and produce
+# corrupt diffs on every checkout.
+*.wav        binary
+*.mp3        binary
+*.m4a        binary
+*.ogg        binary
+*.flac       binary
+*.png        binary
+*.jpg        binary
+*.jpeg       binary
+*.gif        binary
+*.webp       binary
+*.ico        binary
+*.pdf        binary
+*.zip        binary
+*.gz         binary
+*.safetensors binary
+*.onnx       binary
+*.bin        binary
+*.pt         binary
+*.pth        binary
+*.ckpt       binary
+
+# Lockfiles and generated files: keep diffs quiet.
+package-lock.json  linguist-generated=true -diff
+pnpm-lock.yaml     linguist-generated=true -diff
+bun.lock           linguist-generated=true -diff
+uv.lock            linguist-generated=true -diff

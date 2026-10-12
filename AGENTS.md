@@ -2,16 +2,37 @@
 
 Guidance for coding agents working in this repository.
 
-> **Status: scaffold.** Sections marked `TODO` need real answers before this
-> file is useful beyond general hygiene. Delete the `TODO` markers as you fill
-> them in.
+> **Read [`PLAN.md`](./PLAN.md) before touching the audio pipeline.** It holds
+> binding design constraints and verified hardware limits. Four rules that break
+> the product rather than just the code:
+>
+> 1. **Never bias the ASR decoder for error scoring.** `hotwords` and
+>    `initial_prompt` are correct for identifying *which* ayah is being
+>    recited, and forbidden when scoring errors — a biased decoder smooths a
+>    wrong word toward the correct one and hides the mistake being looked for.
+> 2. **Segment at waqf marks**, not fixed windows and not ayah boundaries alone.
+>    The Uthmani text already encodes where the reciter is obliged to pause.
+> 3. **Recited is not tested.** Sight-assisted recitation must never support a
+>    mastery claim; only free recall does.
+> 4. **Precision over recall.** On religious content, falsely telling someone
+>    their recitation is wrong is worse than missing an error.
+>
+> Sections below marked `TODO` still need real answers.
 
 ## What this project is
 
-**TODO — one or two sentences.** What does nour do, and who is it for?
+**nour** is a voice agent for Quran memorization (Hafs). It listens while the
+user recites from memory, detects mistakes in near-real time, maintains a
+competence model of what the user has actually internalized — tracking retention
+decay, hesitation, and fluency in both forward and backward recitation — and
+challenges the user on parallel verses (mutashabihat) when a recitation is clean.
 
-Until this is filled in, agents will guess at the project's purpose from the
-code. That's the single highest-value thing to add here.
+**The competence model is the product.** Real-time error detection is
+commodity: Tarteel already ships it at 15M+ users. Nour's differentiation is
+the retention model, the mutashabihat challenge, and treating hesitation as a
+first-class signal.
+
+Arabic-only. Single-user web app: FastAPI + Pipecat backend, React frontend.
 
 ## Environment
 
@@ -61,15 +82,25 @@ Agents should run these before declaring a task complete.
 
 ## Layout
 
-**TODO — a short map of the repo once it exists.**
-
 ```
 nour/
-├── .opencode/     # project agent config (this dir's config)
-└── AGENTS.md      # this file
+├── .opencode/
+│   └── opencode.jsonc   project agent config (watcher, permissions)
+├── .gitattributes       LF normalization; binaries marked
+├── AGENTS.md            this file
+└── PLAN.md              architecture, roadmap, design constraints
 ```
+
+The layout for `backend/`, `frontend/`, `eval/`, `data/` and `docker/` is
+specified in `PLAN.md` §9 and does not exist yet.
 
 ## Reference material
 
-**TODO — link the specs, ADRs, or docs that define correct behaviour.** Point
-agents at the source of truth so they don't invent requirements.
+| Doc | What it defines |
+|---|---|
+| [`PLAN.md`](./PLAN.md) | Architecture, verified hardware limits, phased roadmap, design constraints |
+| `PLAN.md` §4 | The four rules above, in full |
+| `PLAN.md` §7 | Known gaps — read before estimating any audio work |
+| `PLAN.md` §5 | Data sources: Quran text, waqf marks, tajweed, QurSim, reference audio |
+
+Do not invent requirements. If the answer is not in `PLAN.md`, ask.
