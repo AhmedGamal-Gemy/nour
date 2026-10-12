@@ -1,0 +1,38 @@
+# ---- Secrets (never commit) ----
+.env
+.env.*
+!.env.example
+
+# ---- Node ----
+node_modules/
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Test / coverage ----
+coverage/
+*.lcov
+.pytest_cache/
+
+# ---- Logs & OS ----
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# ---- Local agent/editor state ----
+.opencode/log/
+.vscode/
+.idea/
