@@ -51,6 +51,30 @@ Arabic-only. Single-user web app: FastAPI + Pipecat backend, React frontend.
 - Python output: set `$env:PYTHONIOENCODING='utf8'` before running scripts that
   touch non-ASCII content.
 
+### Graphify backend
+
+Graphify's semantic extraction needs an LLM. It is configured through
+**User-scope environment variables**, pointing at the kilo gateway:
+
+| Variable | Value |
+|---|---|
+| `OPENAI_BASE_URL` | `https://api.kilo.ai/api/gateway/v1` |
+| `OPENAI_MODEL` | `kilo-auto/free` |
+| `OPENAI_API_KEY` | set in the User registry — **never read it, never write it to a file, never commit it** |
+
+They are already permanent (User scope). A `profile.ps1` shim rehydrates them
+into shells launched from an already-running parent, so a fresh shell has them
+without setup.
+
+**Do not re-export these manually and do not paste the key into commands.** If
+`OPENAI_BASE_URL` is empty, the profile has not run — open a new shell.
+
+Note: `kilo-auto/efficient` and above are **paid** and return
+`402 Paid Model - Credits Required`. Stay on `kilo-auto/free` unless the user
+explicitly asks otherwise.
+
+Cost: graphify runs at **$0** on this setup.
+
 ## Conventions
 
 **TODO — fill these in.** Suggested starting points:

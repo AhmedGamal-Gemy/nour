@@ -1,4 +1,4 @@
-# Graph Report - nour  (2026-10-12)
+# Graph Report - nour  (2026-10-13)
 
 ## Corpus Check
 - cluster-only mode — file stats not available
@@ -6,7 +6,7 @@
 ## Summary
 - 30 nodes · 24 edges · 9 communities (5 shown, 4 thin omitted)
 - Extraction: 54% EXTRACTED · 46% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 0.85)
-- Token cost: 1,699 input · 2,378 output
+- Token cost: 0 input · 0 output
 
 ## Graph Freshness
 - Built from commit: `7a370c17`

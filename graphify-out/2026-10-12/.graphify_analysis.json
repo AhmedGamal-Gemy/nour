@@ -92,6 +92,11 @@
       "degree": 2
     },
     {
+      "id": "plan_hardware_constraints",
+      "label": "Hardware Constraints",
+      "degree": 2
+    },
+    {
       "id": "plan_phase0",
       "label": "Phase 0 - Evaluation Harness",
       "degree": 2
@@ -102,13 +107,8 @@
       "degree": 2
     },
     {
-      "id": "plan_hardware_constraints",
-      "label": "Hardware Constraints",
-      "degree": 2
-    },
-    {
-      "id": "agnts_graphify",
-      "label": "Graphify Skill",
+      "id": "plan_competence_model",
+      "label": "Competence Model",
       "degree": 1
     }
   ],
@@ -122,7 +122,7 @@
       ],
       "confidence": "EXTRACTED",
       "relation": "references",
-      "note": "Bridges community 0 \u2192 community 4"
+      "note": "Bridges community 0 → community 4"
     },
     {
       "source": "Pipecat",
@@ -133,7 +133,7 @@
       ],
       "confidence": "EXTRACTED",
       "relation": "references",
-      "note": "Bridges community 4 \u2192 community 2"
+      "note": "Bridges community 2 → community 4"
     },
     {
       "source": "WhisperSTTService",
@@ -144,11 +144,39 @@
       ],
       "confidence": "EXTRACTED",
       "relation": "references",
-      "note": "Bridges community 2 \u2192 community 3"
+      "note": "Bridges community 2 → community 3"
     }
   ],
-  "tokens": {
-    "input": 6486,
-    "output": 5630
-  }
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Nour` connect `Quran AI Tools` to `Voice AI Platforms`?",
+      "why": "High betweenness centrality (0.239) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `WhisperSTTService` (e.g. with `Never Bias Decoder for Error Scoring` and `No Interim Transcription`) actually correct?",
+      "why": "`WhisperSTTService` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Competence Model`, `FastAPI`, `Hesitation Signal` to the rest of the system?",
+      "why": "20 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Pipecat` connect `Voice AI Platforms` to `Quran AI Tools`, `Speech Transcription Tools`?",
+      "why": "High betweenness centrality (0.239) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `Pipecat` (e.g. with `LiveKit` and `Vapi / Retell / Bland`) actually correct?",
+      "why": "`Pipecat` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `WhisperSTTService` connect `Speech Transcription Tools` to `Hardware Resource Constraints`, `Voice AI Platforms`?",
+      "why": "High betweenness centrality (0.227) - this node is a cross-community bridge."
+    }
+  ]
 }

@@ -317,9 +317,36 @@ Scheduling:
   encoded into scheduling.
 - Retention decay drives the review queue.
 
+#### What the competence model drives
+
+The competence model is not a passive record. It is the **input to every
+downstream decision**, which is why it is the product rather than a feature:
+
+- **← Phase 3 (scoring).** Alignment and scoring produce the evidence. Every
+  error class, hesitation event, and hesitation outcome writes into a per-ayah
+  competence record. Without scoring there is nothing to model.
+- **→ Phase 5 (hesitation policy).** `P(failure | hesitation, context)` is
+  *computed from the competence history* — it is not a static per-user setting.
+  The hesitation events recorded against each ayah are exactly the samples the
+  policy is estimated from.
+- **→ Phase 6 (feedback).** Competence state decides **whether** feedback is
+  warranted and how urgently. A lapsed ayah gets immediate intervention; an
+  already-fluent ayah does not need correction noise. The hesitation policy
+  decides *when* to speak; competence state decides *whether it matters*.
+- **→ Phase 7 (mutashabihat challenge).** Challenge selection is gated on
+  competence state. Probe what is strong to deepen it, consolidate what is
+  shaky. **Never challenge something the user cannot yet recite** — that is
+  demoralising, not pedagogic.
+
+Downstream phases read competence state rather than making independent
+judgements. If a later phase needs to decide something, it asks the competence
+model first.
+
 ### Phase 5 — Adaptive hesitation policy
 
-Per-user learned policy, not a hardcoded rule:
+Per-user learned policy, not a hardcoded rule. Its evidence is the competence
+model's hesitation history (§Phase 4) — this phase estimates a policy over that
+history rather than keeping a separate record of its own.
 
 - Log every hesitation: duration, position, outcome (recalled within Ns / failed)
 - Maintain `P(failure | hesitation, context)` per user
@@ -336,6 +363,9 @@ Guardrails:
 
 ### Phase 6 — Feedback and reference playback
 
+Competence state gates what gets feedback (§Phase 4); the hesitation policy
+gates when (§Phase 5). This phase decides *how*.
+
 - Prompt at mandatory / permitted waqf marks, ayah boundaries, or breath pauses
 - Play reference recitation from the point of failure; user-selectable reciter
   (preference here is strong and personal)
@@ -343,6 +373,10 @@ Guardrails:
 - Feedback history, browsable
 
 ### Phase 7 — Mutashabihat challenge *(the differentiator)*
+
+Consumes the competence model (§Phase 4) to decide *what* to ask. Selection is
+gated on competence state: deepen what is strong, consolidate what is shaky,
+and never probe something the user cannot yet recite.
 
 - QurSim-backed parallel-verse selection
 - Challenge generation when a recitation is clean
