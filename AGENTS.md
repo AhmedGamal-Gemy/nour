@@ -19,6 +19,34 @@ Guidance for coding agents working in this repository.
 >
 > Sections below marked `TODO` still need real answers.
 
+## Standing rule: do not reinvent the wheel
+
+**Search for an existing implementation before writing one.** Three times in
+this project's history, code was hand-rolled that already existed:
+
+- The graphify pipeline, when `graphify extract` does the whole thing headless
+- OpenCode config migration steps that are documented in the V2 docs
+- A planned custom WER/alignment harness, when `jiwer` and `WhisperX` are the
+  standard answers
+
+Before building any of these, check:
+
+| Need | Use this |
+|---|---|
+| WER / CER scoring | `jiwer` |
+| Whisper alignment, VAD, word timestamps | `WhisperX` |
+| Quran word-level alignment + quality validator | `quraniio/quran-timing-helper` |
+| Quran recitation feedback app (MIT) | `foyzulkarim/hifz-tester` — same pipeline as our Phase 0–3 |
+| Knowledge graph over the repo | `graphify` (wired, free via kilo gateway) |
+| Parallel agents / teams | ensemble `team_*` tools |
+
+**Adopt by default; fork only when the existing thing demonstrably cannot do
+it.** Reading someone else's implementation is cheaper than writing yours, and
+you inherit their bug reports.
+
+If something genuinely must be built from scratch, say why in the commit
+message before starting.
+
 ## What this project is
 
 **nour** is a voice agent for Quran memorization (Hafs). It listens while the

@@ -279,17 +279,34 @@ when Phase 6 lands.
 
 **Nothing else starts until this tells us which model to build on.**
 
-- Record ~30 clips of **imperfect, hesitant recitation** across several surahs
-- Label ground truth per clip
-- Test matrix: {base, small, medium} × {cpu int8, cuda int8} + `whisper.cpp`
-- Metrics:
+**Do not build a scoring harness.** Use `jiwer` for WER/CER and `WhisperX` for
+VAD, word timestamps and forced alignment. The only thing written from scratch
+is the runner that ties them together over a clip manifest, plus one thing
+nobody provides: separating *true errors* from *hesitation artifacts*.
+
+- Record ~30 clips of **imperfect, hesitant recitation** across several surahs.
+  Phone voice memos are fine. These are the developer's own — the corpus does
+  not exist publicly in this form.
+- Label ground truth per clip.
+- Test matrix: `{tarteel-base, tarteel-tiny, medium} x {cpu int8, cuda int8}`,
+  plus `whisper.cpp` on CPU.
+- Metrics via `jiwer`:
   - WER / CER
   - **p50 and p95 latency per chunk** ← decides CPU vs CUDA
   - per-ayah error attribution
   - **true errors vs hesitation artifacts** — a model may report a substitution
     that is actually a mid-word pause. Without separating these, tuning runs
-    against noise.
+    against noise. **This is the one novel piece.**
+- `quraniio/quran-timing-helper` has a useful idea to copy: a validator that
+  flags alignments too poor to trust. Any clip whose alignment quality is
+  ambiguous should be excluded rather than scored.
 - Output: a comparison table that makes the model + device decision
+
+**Reference implementation to read before writing anything:**
+`foyzulkarim/hifz-tester` (MIT) implements the same transcription →
+normalise → deterministic-align pipeline this plan describes, in a local
+single-user web app. It is the closest prior art to Phases 0–3. Read it before
+building; adopt its alignment approach where it fits.
 
 Clip storage: gitignored by default (personal audio). A few sanitised clips are
 worth committing as CI regression fixtures — decide explicitly.
