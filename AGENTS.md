@@ -47,6 +47,17 @@ you inherit their bug reports.
 If something genuinely must be built from scratch, say why in the commit
 message before starting.
 
+## Strategy (read before proposing anything)
+
+`PLAN.md` §9b records four decisions that were all variations of the same mistake.
+
+**Build the tool; let the tool generate what it needs.** Dataset initiatives,
+fine-tuning, academy partnerships and paid crowd-data collection are all *deferred*, not rejected. Each is real, and each is cheap **only after** a working tool exists. The product is the collection mechanism — users reciting into it generate the data, already labelled, with consent.
+
+**Do not propose building an institution before a working tool.** That pattern was stopped four times in this project's history.
+
+**Aim for a useful tool, not a defensible moat.** Every differentiation claim tested during research was wrong or narrower than stated. See `research/00-FINDINGS.md`.
+
 ## What this project is
 
 **nour** is a voice agent for Quran memorization (Hafs). It listens while the

@@ -504,6 +504,84 @@ the audio work is raw Web Audio either way.
 
 ---
 
+## 9b. People and sequencing strategy
+
+Decisions taken during research, recorded so they are not re-litigated.
+
+### The sequencing principle
+
+**Build the tool; let the tool generate what it needs.** Four separate
+proposals were all variations of *build the institution first*:
+
+| Proposal | Why deferred |
+|---|---|
+| Dataset collection initiative | Months of coordination, consent and annotation standards, with no product to show. The product *is* the collection mechanism — every user reciting into it generates the exact data, already labelled because the ayah is known. |
+| Fine-tuning before alignment | Only public data is professional/fluent recitation, so fine-tuning on it reproduces Tarteel's 2021 model. Fine-tune only where alignment *demonstrably* fails, measured on the benchmark. |
+| Academy partnership | Segmentation answered later, if at all. |
+| Paid crowd data collection | Solves the pivot's problem, not the product's. Users generate it for free once the tool exists. |
+
+All four are real options. None is needed before a working tool exists. The
+tool is what makes them cheap.
+
+### Data strategy
+
+- **Phase 0:** the developer's own ~30 hesitant clips as a personal regression
+  set, plus `Quran-Lab/quranic-asr-benchmark` (600 leakage-free clips, including
+  200 real phone-mic recitations) as the objective instrument. Live leaderboard at
+  `huggingface.co/spaces/Muno459/quranic-asr-leaderboard`.
+- **Long term:** the flywheel. Real users, consent given, ground truth already
+  known. This is the only recitation data the project would ever own — the
+  benchmark is research-licensed and cannot ship.
+- **Paid pilot:** gated, Phase 6 at the earliest, and only if the academy
+  channel (§12) survives. 20–30 clips from real non-native learners via academy
+  contacts, $200–500. A probe, not a dataset initiative.
+
+### People — two tracks, different urgency
+
+**Track 1 — immediate, this month.** Find *any* competent Quran teacher for a
+30-minute clip review. Does not need to be technical. This is the highest-value
+unresolved risk in the project: §4.4 precision. Nobody but a person who corrects
+Quran for a living can say *"you flagged this but it is actually acceptable."*
+
+The ask, verbatim:
+
+> *"I'm building a tool that listens to Quran recitation and flags mistakes — for
+> myself first. I want to check my error detection against human judgement before
+> I trust it. Could you look at 20 recordings of me reciting, tell me where I
+> actually made mistakes, and where I didn't but the tool would have flagged
+> them?"*
+
+Expected outputs: the developer's own error calibration, a false-positive list,
+and a relationship. No commitments either way.
+
+**Track 2 — parallel, not gating.** Someone who is *both* technically capable and
+religiously credible is a genuine asset, and rarer: they can judge a tajweed
+error and an engineering tradeoff in the same conversation, and they would have
+standing in the academy community that the developer does not. Egypt is a
+favourable place for this — large technical population with deep memorisation
+culture.
+
+**But do not make Track 2 a prerequisite.** It would block Track 1, which is
+cheap and needed now, on a search that could take a year. The precision problem
+does not care whether the reviewer can write code.
+
+If a Track 2 person appears, start them exactly where a Track 1 teacher would
+start: reviewing clips. See how it feels before it becomes a commitment — and
+note that co-founding is a different project from *"mainly for me."*
+
+### Honest framing
+
+There is no uncontested gap. Every differentiation claim tested during research
+was either wrong or narrower than stated. What is true: many people have built
+pieces, nobody has shipped the competence model, and the reason is structural —
+hard problem, low willingness to pay — which is precisely the shape a solo
+builder with a real personal use case can work in without venture funding.
+
+Aim for *a tool that is genuinely useful and happens to be possible now that the
+pieces are free*, not for a defensible moat.
+
+---
+
 ## 10. Process
 
 Solo developer, agent-driven (OpenCode + ensemble teams), production-grade.
