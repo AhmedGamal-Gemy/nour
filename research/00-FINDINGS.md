@@ -119,6 +119,36 @@ them real time, drop it.**
 
 ---
 
+## 5. Tashkeel-emitting ASR — capability yes, readiness no
+
+The developer asked whether any ASR emits tashkeel. It does, but nothing is
+usable off the shelf.
+
+| Model | Base | Licence | DL | Likes | Last update | Card |
+|---|---|---|---|---|---|---|
+| `moatazlumin/Arabic_ASR_whisper_small_with_diacritics` | whisper-small | Apache-2.0 | **9** | 1 | 2024-11-27 | empty |
+| `mohmdsh/whisper-small-…-with-diacritics-2` | whisper-small | Apache-2.0 | **5** | 0 | 2025-01-10 | empty |
+
+Notable: `mohmdsh` published **matched with/without-diacritics pairs** one day
+apart — someone ran exactly this A/B experiment and never published results.
+
+Caveats:
+
+- Both were created and last-updated on the same day. Abandoned.
+- No published tashkeel accuracy or consistency metrics.
+- Training data (`AsemBadr/GP`) is inaccessible — gated, private, or removed.
+- **9 downloads against 21,358** for the non-diacritics tarteel model.
+
+**Verdict:** capability demonstrated, readiness absent. Treat as a Phase 0–1
+experiment (can `whisper-base` be fine-tuned to emit tashkeel reliably?), **not
+as a dependency.** This is a genuine opening, not a shelf solution.
+
+Also note: `tarteel-ai/whisper-base-ar-quran`'s own model card is
+auto-generated boilerplate — *"on the None dataset"*, *"More information
+needed"* ×3 — despite being the best-adopted Quranic model.
+
+---
+
 ## 6. What survives as defensible
 
 | Claim | Status |

@@ -197,6 +197,42 @@ On religious content, a false positive ("you said that wrong" when you didn't)
 is worse than a missed error. It erodes trust and can make someone second-guess
 a correct recitation.
 
+Concrete failure mode found in prior art: character-level similarity scoring on
+a 2-character word (`من` vs `ما` → ratio 0.5) falls below any sensible threshold,
+so the most common short words in the Quran are the ones most likely to be
+falsely flagged. Word length must be factored into the score.
+
+### 4.5 Word-level clean does not mean tashkeel correct
+
+Word identity and vowel correctness are **different errors scored by different
+mechanisms**, and a pass at one says nothing about the other.
+
+- **Word level** — which word was said. Needs text normalization; tashkeel must
+  be stripped because the ASR rarely emits it consistently.
+- **Tashkeel / vowel level** — was the vowel right. Cannot be text comparison.
+  Must be scored acoustically against the expected phonetic form.
+
+So: **normalize for word matching, and never report a word-level pass as a
+correctness verdict.** A recitation can be word-perfect and tashkeel-wrong, and
+that is a real hifz mistake that a word-diff structurally cannot see.
+
+Two traps:
+
+- **Post-hoc diacritization does not work.** A diacritizer produces the
+  *expected* tashkeel, so it would "correct" a wrong vowel into the right one and
+  report clean. That is decoder biasing (§4.1) in another form.
+- **Tashkeel-emitting ASR alone does not solve it either.** A model uncertain
+  about the fatha on `حَرَم` emits the statistically likelier form, hiding the
+  error. It also requires reference-aware scoring, not transcription.
+
+Verified in `research/00-FINDINGS.md`: models that emit tashkeel exist but have
+~5–9 downloads against 21,358 for the non-diacritics model, empty model cards,
+no published tashkeel metrics, and inaccessible training data. Capability is
+demonstrated; readiness is not.
+
+**Consequence: the reference corpus must retain full Uthmani tashkeel, always.**
+Layer-1 scoring strips it for comparison only.
+
 ---
 
 ## 5. Data sources
