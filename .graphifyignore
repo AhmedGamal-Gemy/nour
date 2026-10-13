@@ -1,0 +1,23 @@
+# Files excluded from the graphify knowledge graph.
+#
+# The raw research reports (01-07) total ~36k tokens. The free-tier gateway
+# cannot process the corpus at that size - it returns 408 upstream timeouts and
+# hangs. research/00-FINDINGS.md is the synthesis over all eight reports and
+# carries every load-bearing claim, so the graph indexes that instead.
+#
+# TOTAL INDEXED: PLAN.md + AGENTS.md + research/00-FINDINGS.md (~12k tokens)
+
+research/01-market.md
+research/02-competitors.md
+research/03-business.md
+research/04-benchmark.md
+research/05-non-native-market.md
+research/06-non-native-competitors.md
+research/07-accent-asr-feasibility.md
+
+# Generated / large binaries
+graphify-out/
+node_modules/
+.venv/
+models/
+eval/clips/

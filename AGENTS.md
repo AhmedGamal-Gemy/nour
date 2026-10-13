@@ -187,3 +187,14 @@ Rules:
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
 - A committed graphify-out/graph.json is rewritten whole on every build, so a large diff to it in a pull request is expected. Do not flag it as churn or suggest skipping the graph rebuild or its hooks.
+
+**The knowledge graph is STALE and refreshing it costs money. Do not retry at $0.**
+The committed graph covers the earlier two-file corpus and predates design rule
+4.5, section 9b and the strategy section. It is valid and queryable —
+`graphify query` / `path` / `explain` / `god-nodes` all work — it is just
+out of date. Every free-tier model tested truncates mid-JSON on PLAN.md alone
+(7,235 tokens): `nemotron-3-super-120b-a12b:free` burned 90k output tokens for
+11 nodes, and `ling-3.1-flash`, `north-mini-code:free` and the `kilo-auto/free`
+router all truncate or hang. Chunking does not fix it; the ceiling is the
+model's usable output. Refreshing needs a paid LLM. If the user asks why the
+graph is stale, this is the answer — do not re-diagnose it.

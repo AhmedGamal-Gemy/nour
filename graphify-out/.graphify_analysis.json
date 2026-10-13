@@ -1,182 +1,63 @@
 {
   "communities": {
     "0": [
-      "plan_competence_model",
-      "plan_fastapi",
-      "plan_hesitation",
-      "plan_mutashabihat",
-      "plan_nour",
-      "plan_qursim",
-      "plan_react",
-      "plan_tarteel"
+      "research_02_competitors",
+      "research_02_competitors_adaptive_retention_decay_modeling",
+      "research_02_competitors_hesitation_based_competence_modeling",
+      "research_02_competitors_nour",
+      "research_02_competitors_proactive_mutashabihat_challenges",
+      "research_02_competitors_tarteel_ai"
     ],
     "1": [
-      "plan_quranlab",
-      "plan_tanzil",
-      "plan_uthmani_text",
-      "plan_waqf_marks",
-      "plan_waqf_segmentation_rule"
+      "agents",
+      "plan",
+      "research_00_findings",
+      "research_04_benchmark"
     ],
     "2": [
-      "plan_decoder_bias_rule",
-      "plan_faster_whisper",
-      "plan_interim_transcription_gap",
-      "plan_whispersttservice"
-    ],
-    "3": [
-      "plan_hardware_constraints",
-      "plan_phase0",
-      "plan_quranic_whisper_models",
-      "plan_ram_pressure"
-    ],
-    "4": [
-      "plan_livekit",
-      "plan_pipecat",
-      "plan_vapi"
-    ],
-    "5": [
-      "agnts_agents",
-      "agnts_graphify"
-    ],
-    "6": [
-      "plan_quran_muaalem",
-      "plan_tajweed"
-    ],
-    "7": [
-      "plan_precision_over_recall_rule"
-    ],
-    "8": [
-      "plan_recited_not_tested_rule"
+      "research_03_business"
     ]
   },
   "cohesion": {
-    "0": 0.25,
-    "1": 0.4,
-    "2": 0.5,
-    "3": 0.5,
-    "4": 0.6666666666666666,
-    "5": 1.0,
-    "6": 1.0,
-    "7": 1.0,
-    "8": 1.0
+    "0": 0.4,
+    "1": 0.5,
+    "2": 1.0
   },
   "gods": [
     {
-      "id": "plan_nour",
-      "label": "Nour",
-      "degree": 7
-    },
-    {
-      "id": "plan_whispersttservice",
-      "label": "WhisperSTTService",
+      "id": "research_02_competitors",
+      "label": "Competitor Analysis: Quran Memorization Apps (Hifz)",
       "degree": 5
     },
     {
-      "id": "plan_pipecat",
-      "label": "Pipecat",
-      "degree": 4
-    },
-    {
-      "id": "plan_uthmani_text",
-      "label": "Uthmani Text",
-      "degree": 3
-    },
-    {
-      "id": "plan_mutashabihat",
-      "label": "Mutashabihat Challenge",
+      "id": "research_02_competitors_hesitation_based_competence_modeling",
+      "label": "Hesitation-based competence modeling",
       "degree": 2
     },
     {
-      "id": "plan_waqf_segmentation_rule",
-      "label": "Segment at Waqf Marks",
+      "id": "research_02_competitors_tarteel_ai",
+      "label": "Tarteel AI",
       "degree": 2
     },
     {
-      "id": "plan_hardware_constraints",
-      "label": "Hardware Constraints",
-      "degree": 2
+      "id": "research_02_competitors_nour",
+      "label": "Nour",
+      "degree": 1
     },
     {
-      "id": "plan_phase0",
-      "label": "Phase 0 - Evaluation Harness",
-      "degree": 2
+      "id": "research_02_competitors_proactive_mutashabihat_challenges",
+      "label": "Proactive mutashabihat challenges",
+      "degree": 1
     },
     {
-      "id": "plan_quranic_whisper_models",
-      "label": "Quranic Whisper Models",
-      "degree": 2
-    },
-    {
-      "id": "plan_competence_model",
-      "label": "Competence Model",
+      "id": "research_02_competitors_adaptive_retention_decay_modeling",
+      "label": "Retention decay modeling adaptive to fluency/hesitation",
       "degree": 1
     }
   ],
-  "surprises": [
-    {
-      "source": "Nour",
-      "target": "Pipecat",
-      "source_files": [
-        "PLAN.md",
-        "PLAN.md"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "note": "Bridges community 0 → community 4"
-    },
-    {
-      "source": "Pipecat",
-      "target": "WhisperSTTService",
-      "source_files": [
-        "PLAN.md",
-        "PLAN.md"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "note": "Bridges community 2 → community 4"
-    },
-    {
-      "source": "WhisperSTTService",
-      "target": "Quranic Whisper Models",
-      "source_files": [
-        "PLAN.md",
-        "PLAN.md"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "note": "Bridges community 2 → community 3"
-    }
-  ],
-  "questions": [
-    {
-      "type": "bridge_node",
-      "question": "Why does `Nour` connect `Quran AI Tools` to `Voice AI Platforms`?",
-      "why": "High betweenness centrality (0.239) - this node is a cross-community bridge."
-    },
-    {
-      "type": "verify_inferred",
-      "question": "Are the 2 inferred relationships involving `WhisperSTTService` (e.g. with `Never Bias Decoder for Error Scoring` and `No Interim Transcription`) actually correct?",
-      "why": "`WhisperSTTService` has 2 INFERRED edges - model-reasoned connections that need verification."
-    },
-    {
-      "type": "isolated_nodes",
-      "question": "What connects `Competence Model`, `FastAPI`, `Hesitation Signal` to the rest of the system?",
-      "why": "20 weakly-connected nodes found - possible documentation gaps or missing edges."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `Pipecat` connect `Voice AI Platforms` to `Quran AI Tools`, `Speech Transcription Tools`?",
-      "why": "High betweenness centrality (0.239) - this node is a cross-community bridge."
-    },
-    {
-      "type": "verify_inferred",
-      "question": "Are the 2 inferred relationships involving `Pipecat` (e.g. with `LiveKit` and `Vapi / Retell / Bland`) actually correct?",
-      "why": "`Pipecat` has 2 INFERRED edges - model-reasoned connections that need verification."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `WhisperSTTService` connect `Speech Transcription Tools` to `Hardware Resource Constraints`, `Voice AI Platforms`?",
-      "why": "High betweenness centrality (0.227) - this node is a cross-community bridge."
-    }
-  ]
+  "surprises": [],
+  "tokens": {
+    "input": 58061,
+    "output": 90346
+  }
 }

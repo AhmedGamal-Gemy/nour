@@ -1,14 +1,32 @@
 {
   "AGENTS.md": {
-    "mtime": 1791838569.911667,
-    "seen": 1791838819.7503219,
-    "ast_hash": "192c980c254a96f2af4a3cffb3896a1f",
-    "semantic_hash": "192c980c254a96f2af4a3cffb3896a1f"
+    "mtime": 1791888992.2001238,
+    "seen": 1791894717.5386,
+    "ast_hash": "4984a71571d8c9d1daa7a31f25130c22",
+    "semantic_hash": "4984a71571d8c9d1daa7a31f25130c22"
   },
   "PLAN.md": {
-    "mtime": 1791837850.0709362,
-    "seen": 1791838819.7503407,
-    "ast_hash": "ab274e5eef2f88afa740ec4fa449f0b4",
-    "semantic_hash": "ab274e5eef2f88afa740ec4fa449f0b4"
+    "mtime": 1791888976.6208432,
+    "seen": 1791894717.5386312,
+    "ast_hash": "fd3da05360cb1e6d8b934d94f40b03c6",
+    "semantic_hash": "fd3da05360cb1e6d8b934d94f40b03c6"
+  },
+  "research/02-competitors.md": {
+    "mtime": 1791868620.486678,
+    "seen": 1791894717.538645,
+    "ast_hash": "4ebd306eb171c877c458230966fc7f13",
+    "semantic_hash": "4ebd306eb171c877c458230966fc7f13"
+  },
+  "research/03-business.md": {
+    "mtime": 1791868307.2071738,
+    "seen": 1791894717.5386555,
+    "ast_hash": "d70d8faab03f2d711742504eef032944",
+    "semantic_hash": "d70d8faab03f2d711742504eef032944"
+  },
+  "research/04-benchmark.md": {
+    "mtime": 1791868844.469449,
+    "seen": 1791894717.5386665,
+    "ast_hash": "4b2e541c0e9c1ed3a1545d380e79aa29",
+    "semantic_hash": "4b2e541c0e9c1ed3a1545d380e79aa29"
   }
 }
