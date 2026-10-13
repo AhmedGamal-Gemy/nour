@@ -1,63 +1,236 @@
 {
   "communities": {
     "0": [
-      "research_02_competitors",
-      "research_02_competitors_adaptive_retention_decay_modeling",
-      "research_02_competitors_hesitation_based_competence_modeling",
-      "research_02_competitors_nour",
-      "research_02_competitors_proactive_mutashabihat_challenges",
-      "research_02_competitors_tarteel_ai"
+      "agnts_agents",
+      "agnts_no_wheel",
+      "plan_architecture",
+      "plan_faster_whisper",
+      "plan_hardware",
+      "plan_hifz_tester",
+      "plan_int8",
+      "plan_interim_gap",
+      "plan_livekit",
+      "plan_nour",
+      "plan_pipecat",
+      "plan_ram_pressure",
+      "plan_vapi",
+      "plan_whispersttservice"
     ],
     "1": [
-      "agents",
-      "plan",
-      "research_00_findings",
-      "research_04_benchmark"
+      "plan_backward",
+      "plan_competence",
+      "plan_hesitation",
+      "plan_hesitation_policy",
+      "plan_neighbours",
+      "plan_phase4",
+      "plan_phase5",
+      "plan_phase6",
+      "plan_reference_audio",
+      "plan_retention",
+      "rule_recited_tested"
     ],
     "2": [
-      "research_03_business"
+      "agnts_graphify",
+      "find_corrections",
+      "find_findings",
+      "find_speculative",
+      "find_tashkeel_asr",
+      "find_unknown",
+      "find_verified",
+      "plan_muaalem",
+      "plan_tajweed",
+      "rule_tashkeel"
+    ],
+    "3": [
+      "find_defensible",
+      "plan_phase1",
+      "plan_phase7",
+      "plan_phase8",
+      "plan_qursim",
+      "plan_tajweed_competitors",
+      "plan_tarteel"
+    ],
+    "4": [
+      "agnts_strategy",
+      "plan_academy",
+      "plan_finetune_gate",
+      "plan_paid_pilot",
+      "plan_sequencing",
+      "plan_technical_teacher"
+    ],
+    "5": [
+      "plan_alignment",
+      "plan_phase3",
+      "plan_shortword_bug",
+      "plan_teacher_review",
+      "rule_decoder_bias",
+      "rule_precision"
+    ],
+    "6": [
+      "plan_latency",
+      "plan_licensing",
+      "plan_phase0",
+      "plan_quranic_asr_benchmark",
+      "plan_whisper_base",
+      "plan_whisper_tiny"
+    ],
+    "7": [
+      "plan_phase2",
+      "plan_quranlab",
+      "plan_tanzil",
+      "plan_uthmani",
+      "plan_waqf_marks",
+      "rule_waqf"
+    ],
+    "8": [
+      "plan_stack"
     ]
   },
   "cohesion": {
-    "0": 0.4,
-    "1": 0.5,
-    "2": 1.0
+    "0": 0.14285714285714285,
+    "1": 0.2545454545454545,
+    "2": 0.2222222222222222,
+    "3": 0.3333333333333333,
+    "4": 0.4,
+    "5": 0.4,
+    "6": 0.3333333333333333,
+    "7": 0.3333333333333333,
+    "8": 1.0
   },
   "gods": [
     {
-      "id": "research_02_competitors",
-      "label": "Competitor Analysis: Quran Memorization Apps (Hifz)",
+      "id": "plan_competence",
+      "label": "Competence model",
+      "degree": 9
+    },
+    {
+      "id": "plan_phase0",
+      "label": "Phase 0 - Evaluation harness",
+      "degree": 7
+    },
+    {
+      "id": "plan_phase1",
+      "label": "Phase 1 - Data foundation",
+      "degree": 6
+    },
+    {
+      "id": "plan_sequencing",
+      "label": "9b People and sequencing strategy",
+      "degree": 6
+    },
+    {
+      "id": "plan_architecture",
+      "label": "Architecture: Pipecat + local Whisper",
       "degree": 5
     },
     {
-      "id": "research_02_competitors_hesitation_based_competence_modeling",
-      "label": "Hesitation-based competence modeling",
-      "degree": 2
+      "id": "plan_uthmani",
+      "label": "Uthmani text with tashkeel",
+      "degree": 5
     },
     {
-      "id": "research_02_competitors_tarteel_ai",
-      "label": "Tarteel AI",
-      "degree": 2
+      "id": "plan_phase6",
+      "label": "Phase 6 - Feedback and reference playback",
+      "degree": 5
     },
     {
-      "id": "research_02_competitors_nour",
-      "label": "Nour",
-      "degree": 1
+      "id": "plan_whispersttservice",
+      "label": "WhisperSTTService",
+      "degree": 4
     },
     {
-      "id": "research_02_competitors_proactive_mutashabihat_challenges",
-      "label": "Proactive mutashabihat challenges",
-      "degree": 1
+      "id": "rule_tashkeel",
+      "label": "4.5 Word-clean is not tashkeel-correct",
+      "degree": 4
     },
     {
-      "id": "research_02_competitors_adaptive_retention_decay_modeling",
-      "label": "Retention decay modeling adaptive to fluency/hesitation",
-      "degree": 1
+      "id": "plan_hesitation_policy",
+      "label": "Adaptive hesitation policy",
+      "degree": 4
     }
   ],
-  "surprises": [],
-  "tokens": {
-    "input": 58061,
-    "output": 90346
-  }
+  "surprises": [
+    {
+      "source": "What survives as defensible",
+      "target": "Competence model",
+      "source_files": [
+        "research/00-FINDINGS.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Tashkeel-emitting ASR is unready",
+      "target": "4.5 Word-clean is not tashkeel-correct",
+      "source_files": [
+        "research/00-FINDINGS.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "What survives as defensible",
+      "target": "QurSim mutashabihat (7,679 pairs)",
+      "source_files": [
+        "research/00-FINDINGS.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Recorded corrections",
+      "target": "obadx/muaalem-model-v3_2",
+      "source_files": [
+        "research/00-FINDINGS.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Strategy: build the tool first",
+      "target": "9b People and sequencing strategy",
+      "source_files": [
+        "AGENTS.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `Strategy: build the tool first` unexpectedly reaches hub `9b People and sequencing strategy`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Phase 1 - Data foundation` connect `Quranic Content` to `Competence Model`, `Research Findings`, `Phase Roadmap`, `Community 7`?",
+      "why": "High betweenness centrality (0.290) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Stack: FastAPI + React`, `Pipecat`, `RAM pressure (1.5GB free)` to the rest of the system?",
+      "why": "24 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Audio Pipeline` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Phase 0 - Evaluation harness` connect `Phase Roadmap` to `Quranic Content`, `Strategy & People`?",
+      "why": "High betweenness centrality (0.222) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Competence model` connect `Competence Model` to `Quranic Content`?",
+      "why": "High betweenness centrality (0.148) - this node is a cross-community bridge."
+    }
+  ]
 }

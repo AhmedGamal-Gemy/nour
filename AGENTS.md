@@ -188,27 +188,32 @@ Rules:
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
 - A committed graphify-out/graph.json is rewritten whole on every build, so a large diff to it in a pull request is expected. Do not flag it as churn or suggest skipping the graph rebuild or its hooks.
 
-**The knowledge graph is STALE and refreshing it costs money. Do not retry at $0.**
-The committed graph covers the earlier two-file corpus and predates design rule
-4.5, section 9b and the strategy section. It is valid and queryable —
-`graphify query` / `path` / `explain` / `god-nodes` all work — it is just
-out of date.
+**The knowledge graph is current as of the host-agent rebuild** (67 nodes, 80
+edges, 9 communities, all EXTRACTED). The previous 30-node build was stale and
+this one covers design rule 4.5, section 9b and the strategy section. Verified
+working: `god-nodes`, `query`, `path`, `explain` all respond.
 
-Four distinct failure modes were established across eight model/budget
-combinations, so this is diagnosed, not guessed:
+**If the graph ever goes stale again, rebuild it the host-agent way, not with
+the free gateway.** The free tier cannot do semantic extraction of this corpus:
 
 | Failure | Evidence |
 |---|---|
 | **Truncation** | `PLAN.md` and `AGENTS.md` truncate at `max_completion_tokens`, even as single-file chunks and even with `GRAPHIFY_MAX_OUTPUT_TOKENS=16384` |
 | **408 upstream** | `00-FINDINGS.md` fails with `408 The upstream provider was unable to process the request`, at every token budget tried |
 | **Omission** | responses that are complete and well-formed but simply do not address every dispatched file |
-| **Shallow output** | `nemotron-3-super-120b-a12b:free` burned 90,346 output tokens for 11 nodes; kilo-auto/free at `--token-budget 2000` produced ~8 where the committed graph has 30 |
+| **Shallow output** | `nemotron-3-super-120b-a12b:free` burned 90,346 output tokens for 11 nodes; kilo-auto/free at `--token-budget 2000` produced ~8 |
 
-Smaller `--token-budget` (2000, 4 chunks) and pinning single models
-(`ling-3.1-flash`, `north-mini-code:free`, `nemotron-3-*`) were all tried.
-Chunking was driven to split depth 3. `graphify`'s own shrink guard refused
-every partial write — which is why the good 30-node graph survived intact.
+Smaller `--token-budget` (2000, 4 chunks), pinned single models
+(`ling-3.1-flash`, `north-mini-code:free`, `nemotron-3-*`), and split depth 3
+were all tried. Eight attempts, all refused by graphify's own shrink guard.
 
-**The free tier produces inconsistent, shallow extractions of this corpus.**
-Refreshing needs a paid LLM. If the user asks why the graph is stale, this is
-the answer — do not re-diagnose it.
+**To rebuild:** write `.graphify_semantic.json` yourself (the schema is in the
+graphify skill's `references/extraction-spec.md`), then merge with an empty
+`.graphify_ast.json` into `.graphify_extract.json`, then call `build_from_json`
+→ `cluster` → `score_all` → `god_nodes` → `to_json` → `generate` → `export html`.
+Delete the old `graph.json` first, or the shrink guard will refuse on node-ID
+renames. The old graph stays recoverable in git.
+
+`.graphifyignore` limits the indexed corpus to `PLAN.md`, `AGENTS.md` and
+`research/00-FINDINGS.md` — the raw research reports are an evidence trail that
+`00-FINDINGS.md` already synthesises.
