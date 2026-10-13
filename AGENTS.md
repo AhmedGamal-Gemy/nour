@@ -192,9 +192,23 @@ Rules:
 The committed graph covers the earlier two-file corpus and predates design rule
 4.5, section 9b and the strategy section. It is valid and queryable —
 `graphify query` / `path` / `explain` / `god-nodes` all work — it is just
-out of date. Every free-tier model tested truncates mid-JSON on PLAN.md alone
-(7,235 tokens): `nemotron-3-super-120b-a12b:free` burned 90k output tokens for
-11 nodes, and `ling-3.1-flash`, `north-mini-code:free` and the `kilo-auto/free`
-router all truncate or hang. Chunking does not fix it; the ceiling is the
-model's usable output. Refreshing needs a paid LLM. If the user asks why the
-graph is stale, this is the answer — do not re-diagnose it.
+out of date.
+
+Four distinct failure modes were established across eight model/budget
+combinations, so this is diagnosed, not guessed:
+
+| Failure | Evidence |
+|---|---|
+| **Truncation** | `PLAN.md` and `AGENTS.md` truncate at `max_completion_tokens`, even as single-file chunks and even with `GRAPHIFY_MAX_OUTPUT_TOKENS=16384` |
+| **408 upstream** | `00-FINDINGS.md` fails with `408 The upstream provider was unable to process the request`, at every token budget tried |
+| **Omission** | responses that are complete and well-formed but simply do not address every dispatched file |
+| **Shallow output** | `nemotron-3-super-120b-a12b:free` burned 90,346 output tokens for 11 nodes; kilo-auto/free at `--token-budget 2000` produced ~8 where the committed graph has 30 |
+
+Smaller `--token-budget` (2000, 4 chunks) and pinning single models
+(`ling-3.1-flash`, `north-mini-code:free`, `nemotron-3-*`) were all tried.
+Chunking was driven to split depth 3. `graphify`'s own shrink guard refused
+every partial write — which is why the good 30-node graph survived intact.
+
+**The free tier produces inconsistent, shallow extractions of this corpus.**
+Refreshing needs a paid LLM. If the user asks why the graph is stale, this is
+the answer — do not re-diagnose it.
