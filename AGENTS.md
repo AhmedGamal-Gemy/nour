@@ -126,8 +126,14 @@ specified in `PLAN.md` §9 and does not exist yet.
 | `PLAN.md` §4 | The four rules above, in full |
 | `PLAN.md` §7 | Known gaps — read before estimating any audio work |
 | `PLAN.md` §5 | Data sources: Quran text, waqf marks, tajweed, QurSim, reference audio |
+| [`research/00-FINDINGS.md`](./research/00-FINDINGS.md) | **Read before making competitive or pricing claims.** What is verified vs speculative vs unknown, and two recorded corrections |
+| `research/04-benchmark.md` | Model comparison table, licences, eval harness design |
 
 Do not invent requirements. If the answer is not in `PLAN.md`, ask.
+
+**Do not assert a competitive gap from memory.** Two claims ("nobody does
+mutashabihat", "nobody does phoneme feedback") were wrong before verification.
+Check a live product or `research/00-FINDINGS.md` first.
 
 ## graphify
 

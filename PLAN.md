@@ -23,7 +23,23 @@ They also already model the recited-vs-tested distinction: review/memorization
 goals only count progress when ayahs are **hidden**, and "Recite" is a separate
 goal action from "Memorize"/"Review".
 
-**Conclusion: mistake detection is commodity. Do not build Nour's identity on it.**
+**Conclusion: mistake detection is commodity.** Build it because the alignment
+and scoring pipeline underneath is needed by everything downstream — not as the
+differentiator.
+
+**Correction (verified):** Tarteel also ships **mutashabihat** — 814 repeated
+phrases and similar verses for 1,208 ayahs. It is **100% reader lookup**
+(press-and-hold an ayah), never surfaced during or after recitation, and its
+similarity is **lexical** (shared wording) rather than semantic. An earlier
+draft of this plan claimed nobody offered it; that was wrong.
+
+Separately, at least six products claim phoneme/tajweed feedback — Tilawa.ai,
+QariAI, TajweedMate, Quran In Depth, TajweedPage, NUR.AI. **None has published
+WER, PER or F1.** The claims are unverified, so the space is not open, but
+Phase 8 is a quality-of-execution problem rather than an uncontested
+opportunity.
+
+See `research/00-FINDINGS.md` for what is verified versus speculative.
 
 Where Nour wins:
 
@@ -202,17 +218,19 @@ LLM, which would produce plausible but theologically wrong pairings.
 
 ## 6. Model shortlist for Phase 0
 
-| Model | Params | Notes |
-|---|---|---|
-| `tarteel-ai/whisper-base-ar-quran` | 74M | small, fast, CPU-viable |
-| `whisper-quran-v1` (wasimlhr) | large-v3 | 5.35% WER, real-time verse tracking; too big here |
-| `whisper-large-v3-turbo-ar-quran` | 809M | 1.18% WER; **likely too slow on Pascal**, but measure |
-| `yousifgamalo/quran-s-finetuned` | medium | 1.27M samples, Apache-2.0 |
-| `whisper.cpp` | — | alternative runtime, strong AVX2 CPU performance |
+| Model | Params | Licence | Notes |
+|---|---|---|---|
+| `tarteel-ai/whisper-base-ar-quran` | 74M | Apache-2.0 | **Benchmark first.** 5.75% WER, fits 4 GB, CPU+CUDA feasible |
+| `tarteel-ai/whisper-tiny-ar-quran` | 39M | Apache-2.0 | 7.05% WER, 151 MB — the floor if base is too slow |
+| `yousifgamalo/quran-s-finetuned` | 769M | Apache-2.0 | 1.27M samples; medium may be tight on 4 GB |
+| `whisper-large-v3-turbo-ar-quran` | 809M | Apache-2.0 | 1.18% WER, but likely too slow on Pascal — measure |
+| `whisper-quran-v1` (wasimlhr) | large-v3 | **CC-BY-NC-4.0** | ❌ **Non-commercial.** Best provenance, unusable if monetising |
+| `obadx/muaalem-model-v3_2` | 0.6B | MIT | Phoneme-level, for Phase 8 |
+| `whisper.cpp` | — | MIT | Alternative runtime, strong AVX2 CPU |
 
-**Licensing must be verified per model before any monetization** — some
-Quranic models carry `cc-by-nc-4.0`, which blocks commercial use. `openai/whisper`
-itself is MIT.
+**Licensing must be verified per model before any monetization.** The mix
+matters: the most impressive WER figures come from models that cannot be used
+commercially. See `research/04-benchmark.md` for the full table.
 
 ---
 
@@ -385,13 +403,20 @@ and never probe something the user cannot yet recite.
 ### Phase 8 — Tajweed *(later)*
 
 `quran-muaalem` (arXiv 2509.00094, ICML 2026) is open source and is effectively
-a research preview of this phase: 848h annotated, 848–890h corpus, Quran
-Phonetic Script with 11 levels, **75.8% Tajweed F1** on real learner errors.
+a research preview of this phase: 848h annotated, Quran Phonetic Script with 11
+levels, **75.8% Tajweed F1** on real learner errors. The model
+`obadx/muaalem-model-v3_2` is 0.6B params on an **MIT** licence, so it is
+commercially usable where `whisper-quran-v1` is not.
+
+**But this is a crowded space, not an open one.** At least six products already
+claim makharij, ghunnah, madd and qalqalah detection. None has published
+validated metrics. So the question is not "can we do tajweed" but "can we do it
+measurably better than products whose quality is unknown" — which is an
+argument for holding to the precision bar in §4.4, not a reason to skip the
+phase.
 
 Madd length is directly measurable — time the vowel, compare to the required
 2/4/6 counts. No model training required.
-
-Verify its license before building on it.
 
 ---
 
@@ -464,10 +489,37 @@ with automated gates**. That is its value.
 3. Reference reciter default — Husary is ubiquitous but preference is personal.
 4. Is the tajweed model license compatible with eventual monetization?
 5. Which Quranic reciter audio licenses permit commercial use?
+6. **Market sizing is unvalidated.** The 5–20M SAM estimate is unsourced and
+   was flagged as speculation by two independent reviews. No global census of
+   active memorizers exists. Do not build a forecast on it.
+7. **Arabic-only UI is a documented liability** for non-native learners.
+   Correct for the current target segment, but it forecloses a known option.
 
 ---
 
-## 12. Status
+## 12. Open exploration — non-native academies
+
+Investigated and **not recommended as a pivot**, but not closed either.
+
+Western academies predominantly teach reading, tajweed and short-surah
+memorisation with text visible; full hifz is a separate, selective track.
+Dedicated programs exist with real scale, but **no census exists** for the
+segment, so it cannot be sized.
+
+**What changes the picture:** the developer has direct access to specialised
+academies. Reachability — one of the four main objections — is answered.
+
+**Kill criterion: five academy conversations. If fewer than 2 of 5 say
+phonetic-level feedback would save them real time, drop it.** The six questions
+to ask are listed in `research/00-FINDINGS.md` §5.
+
+**Note this contradicts "mainly for me."** A native speaker does not need
+phoneme feedback; a non-native speaker does not need retention decay. They are
+different products, and pursuing this means building for others first.
+
+---
+
+## 13. Status
 
 - [x] Competitive research
 - [x] Hardware verified
@@ -475,6 +527,9 @@ with automated gates**. That is its value.
 - [x] Silence semantics defined (waqf-aware)
 - [x] Hesitation policy defined (adaptive)
 - [x] Data sources identified
+- [x] Market / competitor / business / benchmark research
+- [x] Non-native pivot investigated
+- [ ] Five academy conversations (kill criterion above)
 - [ ] Eval clips recorded
 - [ ] Phase 0 complete
 - [ ] Phase 1 onward
