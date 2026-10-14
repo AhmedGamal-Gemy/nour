@@ -66,3 +66,4 @@ package-lock.json  linguist-generated=true -diff
 pnpm-lock.yaml     linguist-generated=true -diff
 bun.lock           linguist-generated=true -diff
 uv.lock            linguist-generated=true -diff
+graphify-out/graph.json merge=graphify

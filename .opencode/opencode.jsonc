@@ -1,8 +1,8 @@
-{
+﻿{
   "$schema": "https://opencode.ai/config.json",
 
   // Project-scoped OpenCode config.
-  // Merges OVER ~/.config/opencode/opencode.json(c) — only keys set here
+  // Merges OVER ~/.config/opencode/opencode.json(c) â€” only keys set here
   // override global. Keys omitted here inherit from global.
   //
   // Keep this file stack-neutral. Anything that depends on the language or
@@ -56,3 +56,4 @@
     { "action": "shell", "resource": "*DROP TABLE*", "effect": "ask" }
   ]
 }
+
