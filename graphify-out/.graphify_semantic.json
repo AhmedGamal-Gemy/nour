@@ -12,8 +12,8 @@
       "contributor": null
     },
     {
-      "id": "plan_architecture",
-      "label": "Architecture: Pipecat + local Whisper",
+      "id": "plan_tasmeea",
+      "label": "Tasmeea partner (listening teacher)",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -23,8 +23,371 @@
       "contributor": null
     },
     {
-      "id": "plan_stack",
-      "label": "Stack: FastAPI + React",
+      "id": "plan_session",
+      "label": "2b The session",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_loop",
+      "label": "The seven-step loop",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_agenda",
+      "label": "1 Agenda - suggested portion",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_begin",
+      "label": "2 Begin - unprompted, from memory",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_track",
+      "label": "3 Track - silent, knows the text",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_ladder",
+      "label": "4 Ladder - three rungs",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_continue",
+      "label": "5 Continue - never restart",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_score",
+      "label": "6 Score - one run, one segment score",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sess_wisdom",
+      "label": "7 Wisdom - mutashabihat if clean",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seg_near_old",
+      "label": "Near old - yesterday's portion",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seg_long_term",
+      "label": "Long term - from further back",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seg_new",
+      "label": "New material - read from the mushaf",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seg_sighted",
+      "label": "Why new material is sighted",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_memorize",
+      "label": "Memorize cursor",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_revision",
+      "label": "Revision cursor",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_gap",
+      "label": "The gap (measure, do not choose)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_mechanical",
+      "label": "Selection is mechanical",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_override",
+      "label": "Decay-overrun override",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cur_fail_gate",
+      "label": "Fail gate - no new material",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lad_wait",
+      "label": "Rung 0 - wait ~1s",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lad_hint",
+      "label": "Rung 1 - first letters (-0.5)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lad_word",
+      "label": "Rung 2 - full word (-1.0)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lad_no_tts",
+      "label": "Ladder is fixed, not learned",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sco_clean",
+      "label": "Clean run = 10",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sco_stumble",
+      "label": "Recovered stumble = 9.5",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sco_halving",
+      "label": "Repeat failure halves the ayah",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sco_segment",
+      "label": "Score attaches to the segment",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_decoder_bias",
+      "label": "4.1 Never bias the decoder",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_waqf",
+      "label": "4.2 Segment at waqf marks",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_recited_tested",
+      "label": "4.3 Recited is not tested",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_precision",
+      "label": "4.4 Precision over recall",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_shortword",
+      "label": "Short-word false positives",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rule_tashkeel",
+      "label": "4.5 Word-clean is not tashkeel-correct",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_architecture",
+      "label": "Architecture: Pipecat + local Whisper",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -89,7 +452,7 @@
       "contributor": null
     },
     {
-      "id": "plan_ram_pressure",
+      "id": "plan_ram",
       "label": "RAM pressure (1.5GB free)",
       "file_type": "document",
       "source_file": "PLAN.md",
@@ -100,8 +463,19 @@
       "contributor": null
     },
     {
-      "id": "plan_latency",
-      "label": "p50/p95 latency per chunk",
+      "id": "plan_livekit",
+      "label": "LiveKit (rejected)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_vapi",
+      "label": "Vapi / Retell / Bland (rejected)",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -112,7 +486,106 @@
     },
     {
       "id": "plan_interim_gap",
-      "label": "No interim transcription from local Whisper",
+      "label": "No interim transcription",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_desktop",
+      "label": "Desktop-first, VPS later",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_agent_voice",
+      "label": "The agent's own voice",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_qari_voice",
+      "label": "The qari's voice",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_husary_muallim",
+      "label": "Husary Muallim (corrections)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_husary_murattal",
+      "label": "Husary Murattal (revision)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_word_dataset",
+      "label": "quranhive per-word audio",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_timing_helper",
+      "label": "quran-timing-helper (fallback)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_browser_test",
+      "label": "Browser Arabic voice - unverified",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "aud_no_tts",
+      "label": "Never TTS a Quranic word",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -133,8 +606,8 @@
       "contributor": null
     },
     {
-      "id": "plan_whisper_tiny",
-      "label": "tarteel-ai/whisper-tiny-ar-quran",
+      "id": "plan_muaalem",
+      "label": "obadx/muaalem-model-v3_2",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -145,7 +618,7 @@
     },
     {
       "id": "plan_licensing",
-      "label": "Model licensing and CC-BY-NC-4.0",
+      "label": "Model licensing (CC-BY-NC)",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -155,151 +628,8 @@
       "contributor": null
     },
     {
-      "id": "rule_decoder_bias",
-      "label": "4.1 Never bias the decoder for error scoring",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "rule_waqf",
-      "label": "4.2 Segment at waqf marks",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "rule_recited_tested",
-      "label": "4.3 Recited is not tested",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "rule_precision",
-      "label": "4.4 Precision over recall",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "rule_tashkeel",
-      "label": "4.5 Word-clean is not tashkeel-correct",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_alignment",
-      "label": "Forced alignment + Token F1/IDF",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_shortword_bug",
-      "label": "Short-word false-positive bug",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_competence",
-      "label": "Competence model",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_retention",
-      "label": "Retention decay",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_neighbours",
-      "label": "Neighbour anchoring (+/-2 ayah)",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_backward",
-      "label": "Backward recitation (taraji')",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_hesitation",
-      "label": "Hesitation as first-class signal",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_hesitation_policy",
-      "label": "Adaptive hesitation policy",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_qursim",
-      "label": "QurSim mutashabihat (7,679 pairs)",
+      "id": "plan_quranlab_bench",
+      "label": "Quran-Lab/quranic-asr-benchmark",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -322,6 +652,17 @@
     {
       "id": "plan_waqf_marks",
       "label": "Waqf marks (lazim/jaiz/saktah)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_qursim",
+      "label": "QurSim mutashabihat (7,649 pairs)",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -364,40 +705,7 @@
       "contributor": null
     },
     {
-      "id": "plan_muaalem",
-      "label": "obadx/muaalem-model-v3_2",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_quranic_asr_benchmark",
-      "label": "Quran-Lab/quranic-asr-benchmark",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_reference_audio",
-      "label": "Reference recitation audio",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_tarteel",
+      "id": "pa_tarteel",
       "label": "Tarteel (15M users)",
       "file_type": "document",
       "source_file": "PLAN.md",
@@ -408,8 +716,8 @@
       "contributor": null
     },
     {
-      "id": "plan_hifz_tester",
-      "label": "foyzulkarim/hifz-tester (MIT)",
+      "id": "pa_tarteel_mutashabihat",
+      "label": "Tarteel mutashabihat - lookup only",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -419,7 +727,7 @@
       "contributor": null
     },
     {
-      "id": "plan_tajweed_competitors",
+      "id": "pa_tajweed_competitors",
       "label": "Tilawa/QariAI/TajweedMate et al",
       "file_type": "document",
       "source_file": "PLAN.md",
@@ -430,19 +738,8 @@
       "contributor": null
     },
     {
-      "id": "plan_livekit",
-      "label": "LiveKit",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_vapi",
-      "label": "Vapi / Retell / Bland",
+      "id": "pa_hifz_tester",
+      "label": "foyzulkarim/hifz-tester (MIT)",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -508,7 +805,7 @@
     },
     {
       "id": "plan_phase5",
-      "label": "Phase 5 - Adaptive hesitation policy",
+      "label": "Phase 5 - The prompt ladder",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -519,7 +816,18 @@
     },
     {
       "id": "plan_phase6",
-      "label": "Phase 6 - Feedback and reference playback",
+      "label": "Phase 6 - Feedback delivery",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_phase10",
+      "label": "Phase 5.5 - Scoring",
       "file_type": "document",
       "source_file": "PLAN.md",
       "source_location": null,
@@ -551,6 +859,50 @@
       "contributor": null
     },
     {
+      "id": "plan_competence",
+      "label": "Competence model",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_retention",
+      "label": "Retention decay",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_neighbours",
+      "label": "Neighbour anchoring (+/-2)",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "plan_rung_reached",
+      "label": "rung_reached field",
+      "file_type": "document",
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
       "id": "plan_sequencing",
       "label": "9b People and sequencing strategy",
       "file_type": "document",
@@ -573,17 +925,6 @@
       "contributor": null
     },
     {
-      "id": "plan_technical_teacher",
-      "label": "Track 2 - technical + religious collaborator",
-      "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
       "id": "plan_academy",
       "label": "Non-native academy exploration",
       "file_type": "document",
@@ -595,21 +936,10 @@
       "contributor": null
     },
     {
-      "id": "plan_paid_pilot",
-      "label": "Paid pilot (gated, Phase 6)",
+      "id": "plan_no_wheel",
+      "label": "AGENTS: do not reinvent the wheel",
       "file_type": "document",
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "plan_finetune_gate",
-      "label": "Fine-tune only on eval evidence",
-      "file_type": "document",
-      "source_file": "PLAN.md",
+      "source_file": "AGENTS.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
@@ -619,28 +949,6 @@
     {
       "id": "agnts_agents",
       "label": "AGENTS.md",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "agnts_no_wheel",
-      "label": "Do not reinvent the wheel",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "agnts_strategy",
-      "label": "Strategy: build the tool first",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": null,
@@ -672,19 +980,8 @@
       "contributor": null
     },
     {
-      "id": "find_verified",
-      "label": "Verified claims",
-      "file_type": "document",
-      "source_file": "research/00-FINDINGS.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "find_speculative",
-      "label": "Speculative claims (unsourced SAM)",
+      "id": "find_defensible",
+      "label": "What survives as defensible",
       "file_type": "document",
       "source_file": "research/00-FINDINGS.md",
       "source_location": null,
@@ -714,34 +1011,492 @@
       "captured_at": null,
       "author": null,
       "contributor": null
-    },
-    {
-      "id": "find_defensible",
-      "label": "What survives as defensible",
-      "file_type": "document",
-      "source_file": "research/00-FINDINGS.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
-    },
-    {
-      "id": "find_tashkeel_asr",
-      "label": "Tashkeel-emitting ASR is unready",
-      "file_type": "document",
-      "source_file": "research/00-FINDINGS.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null
     }
   ],
   "edges": [
     {
       "source": "plan_nour",
-      "target": "plan_architecture",
+      "target": "plan_tasmeea",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_tasmeea",
+      "target": "plan_session",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_session",
+      "target": "plan_loop",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_agenda",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_begin",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_track",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_ladder",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_continue",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_score",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_loop",
+      "target": "sess_wisdom",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_session",
+      "target": "seg_near_old",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_session",
+      "target": "seg_long_term",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_session",
+      "target": "seg_new",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_near_old",
+      "target": "cur_memorize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_long_term",
+      "target": "cur_revision",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_new",
+      "target": "cur_memorize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_new",
+      "target": "seg_sighted",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_sighted",
+      "target": "rule_tashkeel",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "seg_new",
+      "target": "seg_sighted",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_memorize",
+      "target": "cur_revision",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_revision",
+      "target": "cur_gap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_gap",
+      "target": "plan_competence",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_session",
+      "target": "cur_mechanical",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_override",
+      "target": "plan_competence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_override",
+      "target": "cur_mechanical",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_fail_gate",
+      "target": "seg_near_old",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "cur_fail_gate",
+      "target": "seg_long_term",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_ladder",
+      "target": "lad_wait",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_ladder",
+      "target": "lad_hint",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_ladder",
+      "target": "lad_word",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lad_wait",
+      "target": "lad_hint",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lad_hint",
+      "target": "lad_word",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase5",
+      "target": "lad_no_tts",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_score",
+      "target": "sco_clean",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_score",
+      "target": "sco_stumble",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_score",
+      "target": "sco_halving",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_score",
+      "target": "sco_segment",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sco_halving",
+      "target": "cur_override",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase10",
+      "target": "sess_score",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_continue",
+      "target": "plan_no_wheel",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_decoder_bias",
+      "target": "plan_whispersttservice",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_waqf",
+      "target": "plan_waqf_marks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_tashkeel",
+      "target": "plan_muaalem",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_tashkeel",
+      "target": "aud_no_tts",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_precision",
+      "target": "rule_shortword",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_recited_tested",
+      "target": "seg_new",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_recited_tested",
+      "target": "plan_competence",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_waqf",
+      "target": "sess_ladder",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rule_waqf",
+      "target": "plan_phase2",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -801,7 +1556,7 @@
     },
     {
       "source": "plan_hardware",
-      "target": "plan_ram_pressure",
+      "target": "plan_ram",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -820,8 +1575,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_hifz_tester",
-      "target": "plan_whispersttservice",
+      "source": "plan_architecture",
+      "target": "plan_livekit",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -830,8 +1585,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_tarteel",
-      "target": "plan_tajweed_competitors",
+      "source": "plan_architecture",
+      "target": "plan_vapi",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -840,8 +1595,38 @@
       "weight": 1.0
     },
     {
-      "source": "rule_decoder_bias",
-      "target": "plan_alignment",
+      "source": "plan_architecture",
+      "target": "plan_desktop",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_desktop",
+      "target": "plan_hardware",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "aud_qari_voice",
+      "target": "aud_no_tts",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "aud_agent_voice",
+      "target": "aud_qari_voice",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -850,8 +1635,8 @@
       "weight": 1.0
     },
     {
-      "source": "rule_waqf",
-      "target": "plan_waqf_marks",
+      "source": "aud_qari_voice",
+      "target": "aud_husary_muallim",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -860,8 +1645,8 @@
       "weight": 1.0
     },
     {
-      "source": "rule_tashkeel",
-      "target": "plan_muaalem",
+      "source": "aud_husary_muallim",
+      "target": "aud_husary_murattal",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -870,28 +1655,8 @@
       "weight": 1.0
     },
     {
-      "source": "rule_precision",
-      "target": "plan_shortword_bug",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "rule_recited_tested",
-      "target": "plan_competence",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "rule_tashkeel",
-      "target": "plan_uthmani",
+      "source": "aud_qari_voice",
+      "target": "aud_word_dataset",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -900,11 +1665,61 @@
       "weight": 1.0
     },
     {
-      "source": "rule_waqf",
-      "target": "plan_phase2",
+      "source": "aud_word_dataset",
+      "target": "aud_husary_muallim",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "aud_timing_helper",
+      "target": "aud_word_dataset",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "aud_agent_voice",
+      "target": "aud_browser_test",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "aud_browser_test",
+      "target": "plan_desktop",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sess_ladder",
+      "target": "aud_qari_voice",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lad_hint",
+      "target": "aud_agent_voice",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "PLAN.md",
       "source_location": null,
       "weight": 1.0
@@ -921,37 +1736,7 @@
     },
     {
       "source": "plan_phase0",
-      "target": "plan_whisper_tiny",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase0",
-      "target": "plan_quranic_asr_benchmark",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase0",
-      "target": "plan_latency",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase0",
-      "target": "plan_finetune_gate",
+      "target": "plan_quranlab_bench",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -970,8 +1755,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_phase3",
-      "target": "plan_alignment",
+      "source": "plan_phase8",
+      "target": "plan_muaalem",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -980,8 +1765,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_alignment",
-      "target": "plan_shortword_bug",
+      "source": "plan_muaalem",
+      "target": "rule_tashkeel",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -990,99 +1775,9 @@
       "weight": 1.0
     },
     {
-      "source": "plan_phase3",
-      "target": "rule_decoder_bias",
+      "source": "plan_phase8",
+      "target": "pa_tajweed_competitors",
       "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase4",
-      "target": "plan_competence",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_competence",
-      "target": "plan_retention",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_competence",
-      "target": "plan_hesitation",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_competence",
-      "target": "plan_backward",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_competence",
-      "target": "plan_neighbours",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_competence",
-      "target": "rule_recited_tested",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase5",
-      "target": "plan_hesitation_policy",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_hesitation_policy",
-      "target": "plan_competence",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_hesitation_policy",
-      "target": "plan_hesitation",
-      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "PLAN.md",
@@ -1112,16 +1807,6 @@
     {
       "source": "plan_phase1",
       "target": "plan_tajweed",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase1",
-      "target": "plan_reference_audio",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1171,7 +1856,7 @@
     },
     {
       "source": "plan_qursim",
-      "target": "plan_tarteel",
+      "target": "pa_tarteel_mutashabihat",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1180,8 +1865,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_phase8",
-      "target": "plan_muaalem",
+      "source": "pa_tarteel",
+      "target": "pa_tarteel_mutashabihat",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1190,8 +1875,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_phase8",
-      "target": "plan_tajweed_competitors",
+      "source": "pa_tarteel",
+      "target": "pa_tajweed_competitors",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1200,18 +1885,8 @@
       "weight": 1.0
     },
     {
-      "source": "plan_tajweed",
-      "target": "rule_tashkeel",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase6",
-      "target": "plan_reference_audio",
+      "source": "pa_hifz_tester",
+      "target": "plan_whispersttservice",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1220,269 +1895,9 @@
       "weight": 1.0
     },
     {
-      "source": "plan_phase6",
-      "target": "plan_competence",
+      "source": "pa_hifz_tester",
+      "target": "plan_no_wheel",
       "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_phase6",
-      "target": "plan_hesitation_policy",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_sequencing",
-      "target": "plan_teacher_review",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_sequencing",
-      "target": "plan_technical_teacher",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_sequencing",
-      "target": "plan_academy",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_sequencing",
-      "target": "plan_paid_pilot",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_sequencing",
-      "target": "plan_finetune_gate",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_teacher_review",
-      "target": "rule_precision",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_academy",
-      "target": "plan_paid_pilot",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_stack",
-      "target": "plan_fastapi",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_stack",
-      "target": "plan_react",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_architecture",
-      "target": "plan_livekit",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "plan_architecture",
-      "target": "plan_vapi",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_verified",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_speculative",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_unknown",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_corrections",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_defensible",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_findings",
-      "target": "find_tashkeel_asr",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_defensible",
-      "target": "plan_competence",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_defensible",
-      "target": "plan_qursim",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_corrections",
-      "target": "plan_muaalem",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "find_tashkeel_asr",
-      "target": "rule_tashkeel",
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "agnts_agents",
-      "target": "plan_nour",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "agnts_no_wheel",
-      "target": "plan_hifz_tester",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "agnts_strategy",
-      "target": "plan_sequencing",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "PLAN.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "agnts_graphify",
-      "target": "find_findings",
-      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "PLAN.md",
@@ -1550,6 +1965,16 @@
       "weight": 1.0
     },
     {
+      "source": "plan_phase5",
+      "target": "plan_phase10",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
       "source": "plan_phase6",
       "target": "plan_phase7",
       "relation": "references",
@@ -1563,6 +1988,206 @@
       "source": "plan_phase7",
       "target": "plan_phase8",
       "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase4",
+      "target": "plan_competence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_competence",
+      "target": "plan_retention",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_competence",
+      "target": "plan_neighbours",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_competence",
+      "target": "plan_rung_reached",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_competence",
+      "target": "rule_recited_tested",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase5",
+      "target": "plan_competence",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase6",
+      "target": "plan_competence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase10",
+      "target": "plan_competence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_phase7",
+      "target": "plan_competence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_sequencing",
+      "target": "plan_teacher_review",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_sequencing",
+      "target": "plan_academy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_teacher_review",
+      "target": "rule_precision",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "plan_no_wheel",
+      "target": "pa_hifz_tester",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agnts_agents",
+      "target": "plan_nour",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agnts_graphify",
+      "target": "find_findings",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "find_findings",
+      "target": "find_defensible",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "find_findings",
+      "target": "find_unknown",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "find_findings",
+      "target": "find_corrections",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "find_defensible",
+      "target": "plan_competence",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "find_defensible",
+      "target": "plan_qursim",
+      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "PLAN.md",
@@ -1587,15 +2212,16 @@
       "source_file": "PLAN.md"
     },
     {
-      "id": "competence_drivers",
-      "label": "What the competence model drives",
+      "id": "session_loop",
+      "label": "The seven-step session loop",
       "nodes": [
-        "plan_competence",
-        "plan_retention",
-        "plan_hesitation",
-        "plan_backward",
-        "plan_neighbours",
-        "plan_hesitation_policy"
+        "sess_agenda",
+        "sess_begin",
+        "sess_track",
+        "sess_ladder",
+        "sess_continue",
+        "sess_score",
+        "sess_wisdom"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",
@@ -1603,14 +2229,54 @@
       "source_file": "PLAN.md"
     },
     {
-      "id": "audio_stack",
-      "label": "Audio pipeline stack",
+      "id": "three_segments",
+      "label": "The three session segments",
       "nodes": [
-        "plan_pipecat",
-        "plan_whispersttservice",
-        "plan_faster_whisper",
-        "plan_int8",
-        "plan_hardware"
+        "seg_near_old",
+        "seg_long_term",
+        "seg_new"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "two_cursors",
+      "label": "Two cursors and the gap",
+      "nodes": [
+        "cur_memorize",
+        "cur_revision",
+        "cur_gap",
+        "cur_override",
+        "cur_fail_gate"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "prompt_ladder",
+      "label": "The three-rung prompt ladder",
+      "nodes": [
+        "lad_wait",
+        "lad_hint",
+        "lad_word"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN.md"
+    },
+    {
+      "id": "audio_voices",
+      "label": "Two voices: agent and qari",
+      "nodes": [
+        "aud_agent_voice",
+        "aud_qari_voice",
+        "aud_husary_muallim",
+        "aud_word_dataset"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",

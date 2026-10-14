@@ -206,6 +206,7 @@ engineering problem in the product.
 - **TTS for Quranic words** — see §5.1. The word is always a real recitation.
 
 ## 3. Architecture decision
+
 **Framework: Pipecat** (BSD-2, active, 16k+ stars).
 
 Rationale:
