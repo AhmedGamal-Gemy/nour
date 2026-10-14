@@ -1,32 +1,26 @@
 {
   "AGENTS.md": {
-    "mtime": 1791888992.2001238,
-    "seen": 1791894717.5386,
-    "ast_hash": "4984a71571d8c9d1daa7a31f25130c22",
-    "semantic_hash": "4984a71571d8c9d1daa7a31f25130c22"
+    "mtime": 1792005500.86166,
+    "seen": 1792005518.4803686,
+    "ast_hash": "3765045621d9cee19b6e781d944d8311",
+    "semantic_hash": ""
   },
   "PLAN.md": {
-    "mtime": 1791888976.6208432,
-    "seen": 1791894717.5386312,
-    "ast_hash": "fd3da05360cb1e6d8b934d94f40b03c6",
-    "semantic_hash": "fd3da05360cb1e6d8b934d94f40b03c6"
+    "mtime": 1792001569.2435822,
+    "seen": 1792005518.4803774,
+    "ast_hash": "ae7e3749eb289c6368219fa31b4407a7",
+    "semantic_hash": ""
   },
-  "research/02-competitors.md": {
-    "mtime": 1791868620.486678,
-    "seen": 1791894717.538645,
-    "ast_hash": "4ebd306eb171c877c458230966fc7f13",
-    "semantic_hash": "4ebd306eb171c877c458230966fc7f13"
+  ".opencode/plugins/graph-first.js": {
+    "mtime": 1792005348.8327727,
+    "seen": 1792005518.4803507,
+    "ast_hash": "40094e3398854892867e67fc8e984fdb",
+    "semantic_hash": ""
   },
-  "research/03-business.md": {
-    "mtime": 1791868307.2071738,
-    "seen": 1791894717.5386555,
-    "ast_hash": "d70d8faab03f2d711742504eef032944",
-    "semantic_hash": "d70d8faab03f2d711742504eef032944"
-  },
-  "research/04-benchmark.md": {
-    "mtime": 1791868844.469449,
-    "seen": 1791894717.5386665,
-    "ast_hash": "4b2e541c0e9c1ed3a1545d380e79aa29",
-    "semantic_hash": "4b2e541c0e9c1ed3a1545d380e79aa29"
+  "research/00-FINDINGS.md": {
+    "mtime": 1791886695.4530647,
+    "seen": 1792005518.480384,
+    "ast_hash": "7749dc2bea29e9d9a8bf7a2336634371",
+    "semantic_hash": ""
   }
 }
