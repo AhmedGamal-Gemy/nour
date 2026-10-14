@@ -298,10 +298,48 @@ Layer-1 scoring strips it for comparison only.
 | **Mutashabihat (parallel verses)** | **QurSim** (Sharaf & Atwell, 2012) | **7,679 pairs from Ibn Kathir's Tafsir.** Labels: strong 40%, related 48%, unrelated 11.5% |
 | Reference recitation audio | everyayah.com / Quran.com recitations API | per-ayah, multiple reciters incl. Husary |
 | Morphology | Quranic Arabic Corpus (`corpus.quran.com`) | ~77k words, GPL — verbatim only |
+| **Per-word audio** | **`quranhive/quran_word_by_word_audio`** | **Already cut into single words. `SSS_AAA_WWW.mp3`. ~1.5 GB, CC-BY-4.0 (commercial OK). Reciter undocumented.** |
+| **Word → audio mapping** | `quranhive/quran_word_by_word_audio_mapping` | `surah, ayah, word, arb_word, word_id (#67:1:3), wordplay (067_001_003)` |
 
 Mutashabihat is the differentiator and is **already curated by classical
 scholars**. Nour curates *from* QurSim rather than generating parallels with an
 LLM, which would produce plausible but theologically wrong pairings.
+
+### §5.1 Audio — two voices, not one
+
+The app speaks in two registers, and conflating them is a correctness error.
+
+| Register | Used for | Source |
+|---|---|---|
+| **The agent's own voice** | Commentary — encouragement, "again from here", "you always stumble on this one" | Browser Arabic TTS. **Unverified — see below.** |
+| **The qari's voice** | The correct word itself | Pre-cut recitation audio. Never TTS. |
+
+A text-to-speech voice must never model a Quranic word. It will shorten a madd
+or drop a ghunnah with its own idea of the pronunciation, and a learner who
+hears it wrong learns it wrong. That is worse than no correction at all. The
+word is always a real recitation; the agent only carries the commentary.
+
+**Verified on the target machine:** Windows desktop TTS is **English only**
+(David, Zira). `Microsoft Hoda - Arabic (Egypt)` is registered at the OneCore
+level, which is what Edge and Chrome use, so browser speech can probably reach
+Arabic — but **this is not verified and must be tested in a browser before
+anything depends on it.** If no acceptable Arabic voice exists, comments fall
+back to on-screen text and only the words are spoken, which still works.
+
+**Reciter choice:** Mahmoud Khalil Al-Husary. Two recitations exist and serve
+different jobs —
+
+- **Muallim** (teaching recitation, slower and more deliberate) — corrections
+  and new material
+- **Murattal** (standard pace) — everyday revision and listening
+
+Both confirmed reachable via everyayah.com and quran.com recitation id 12.
+`quran_word_by_word_audio` is a third option whose reciter is unknown; it needs
+a listening test before adoption, and if it is not Husary it is not used.
+
+**If no pre-cut word audio fits:** `qurani.io/quran-timing-helper` produces
+word-level timings locally using Whisper plus wav2vec2 forced alignment, and
+slicing follows directly. That is the fallback, not the first choice.
 
 ---
 
