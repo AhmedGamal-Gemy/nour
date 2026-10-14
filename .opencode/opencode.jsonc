@@ -54,6 +54,10 @@
     // Dropping the database is never an implicit step.
     { "action": "shell", "resource": "*DROP DATABASE*", "effect": "ask" },
     { "action": "shell", "resource": "*DROP TABLE*", "effect": "ask" }
-  ]
+  ],
+
+  "experimental": {
+    "policies": []
+  }
 }
 
