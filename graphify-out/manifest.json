@@ -1,14 +1,14 @@
 {
   "AGENTS.md": {
-    "mtime": 1792005500.86166,
-    "seen": 1792005518.4803686,
-    "ast_hash": "3765045621d9cee19b6e781d944d8311",
+    "mtime": 1792006548.3832717,
+    "seen": 1792006576.8577354,
+    "ast_hash": "90f38716ff0db4ec32c8826c6315bf45",
     "semantic_hash": ""
   },
   "PLAN.md": {
-    "mtime": 1792001569.2435822,
-    "seen": 1792005518.4803774,
-    "ast_hash": "ae7e3749eb289c6368219fa31b4407a7",
+    "mtime": 1792006548.4164217,
+    "seen": 1792006576.857748,
+    "ast_hash": "ac1850795146a05ed3cd5bbd2cbb348f",
     "semantic_hash": ""
   },
   ".opencode/plugins/graph-first.js": {
@@ -21,6 +21,12 @@
     "mtime": 1791886695.4530647,
     "seen": 1792005518.480384,
     "ast_hash": "7749dc2bea29e9d9a8bf7a2336634371",
+    "semantic_hash": ""
+  },
+  "docs/session-map.md": {
+    "mtime": 1792006281.1645286,
+    "seen": 1792006576.8577566,
+    "ast_hash": "76b12a32c7a3b33765a69774262ab974",
     "semantic_hash": ""
   }
 }
