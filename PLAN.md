@@ -117,6 +117,73 @@ exists. Everything else in this plan serves this loop.
               encouragement and a bonus. Never the main event.
 ```
 
+### The three segments
+
+Every session is three segments, of which two are recited from memory and one
+is read from the book.
+
+| | | Source | Text |
+|---|---|---|---|
+| **1. NEAR OLD** | yesterday's portion, recited from memory | the memorize cursor, one back | hidden |
+| **2. LONG TERM** | a portion from further back | the revision cursor | hidden |
+| **3. NEW** | today's fresh portion | next in sequence | **visible, from the mushaf** |
+
+New material is always read *from the book* and corrected for pronunciation.
+That is deliberate: memorising something with wrong tajweed locks the error in,
+and a settled wrong memorisation is far harder to fix than a hesitant one. So
+the order matters — get the pronunciation clean before it becomes memory.
+
+### The two cursors
+
+Selection is mechanical, not intelligent. Two pointers move forward through the
+Quran, one segment per session each:
+
+```
+MEMORIZE cursor  ──▶  ──▶  ──▶     today's new material
+REVISION cursor  ──▶  ──▶  ──▶     trails behind, same pace
+                  ├── gap ─┤
+```
+
+- **NEAR OLD** is wherever the memorize cursor was yesterday.
+- **LONG TERM** is wherever the revision cursor is now.
+- Both advance one segment per session, **in order**, exactly as with a sheikh.
+
+**The gap** is the only real parameter, and it is currently unknown — the
+developer could not state how far behind his sheikh's revision runs. The gap
+decides whether retention works: too far behind is re-learning, too close is
+not really long-term revision.
+
+So the app's first job is to **measure** it from real sessions rather than
+choose it: after a week it reports the distance behind, and how many of those
+revisions failed. The gap becomes a number that can be moved and its effect
+observed, instead of a feeling.
+
+### The only intelligent part
+
+The app does **not** replace the cursors. It keeps the same predictable order
+and interrupts it for one reason only:
+
+> **Decay is outrunning the revision cursor.**
+
+The gap is fixed, but retention is not. Some portions are remembered in one
+pass and forgotten in a week. In-order revision reaches them too late, after
+they are already gone. When the competence model detects that, it resets the
+revision cursor back to the failing portion.
+
+Everything else is mechanical. This single override is the whole intelligence
+of the scheduler.
+
+### The fail gate
+
+If either old segment goes badly, the session becomes remediation on that
+segment and **no new material is added today**. This is the discipline that
+stops the memorise cursor moving forward on top of weak ground.
+
+**Not yet defined: what "badly" means.** Candidates are hitting the full-word
+rung more than N times, or more than N corrections in one run, or being unable
+to begin. This must be settled with the developer before Phase 5, and is listed
+in §11.
+
 ### What the app is
 
 A listening teacher. It sets the agenda, knows the text, follows silently,
@@ -134,8 +201,9 @@ engineering problem in the product.
 
 - **Backward recitation (تراجع)** — not part of this practice. Out.
 - **Restart on error** — the run is continuous by design.
-- **Audio correction** — the word is spoken, not played by a reciter, by
-  default. Reference playback is optional and separate.
+- **Replacing the cursors with a smart scheduler** — the mechanical in-order
+  schedule stays; only the decay override is added on top.
+- **TTS for Quranic words** — see §5.1. The word is always a real recitation.
 
 ## 3. Architecture decision
 **Framework: Pipecat** (BSD-2, active, 16k+ stars).
@@ -750,6 +818,20 @@ with automated gates**. That is its value.
    active memorizers exists. Do not build a forecast on it.
 7. **Arabic-only UI is a documented liability** for non-native learners.
    Correct for the current target segment, but it forecloses a known option.
+
+### Product decisions still open
+
+These came out of the session design and must be settled with the developer
+before the phases that depend on them.
+
+| # | Question | Blocks | Status |
+|---|---|---|---|
+| 8 | **What counts as "badly" in the fail gate?** Full-word rung more than N times? More than N corrections in a run? Unable to begin? | Phase 5 | **Unsettled.** Default to start: full-word rung twice in one run. |
+| 9 | **The mutashabihat bonus** — what does it actually ask when a run is clean? One question or several? Does it name the parallel verse, or ask the user to find it? | Phase 7 | **Undesigned.** It is the differentiator and must not stay an afterthought. |
+| 10 | **Mushaf script for new material** — Madani (Saudi/standard) or Indo-Pak? Determines which Quran text source is needed and how words render. | Phase 1 | **Unsettled.** The developer reads from a physical mushaf; whichever it is should match. |
+| 11 | **Does a usable Arabic browser voice exist?** Windows desktop TTS is English-only. Hoda is registered at OneCore level, so Edge/Chrome can probably reach Arabic, but this is **unverified**. If not acceptable, comments become on-screen text and only the words are spoken. | Phase 6 | **Needs a browser test.** Free, five minutes. |
+| 12 | **The reciter for `quran_word_by_word_audio`** — the dataset is CC-BY-4.0 and complete, but its reciter is undocumented. If it is not Husary, use `quran-timing-helper` on Husary Muallim instead. | Phase 6 | **Needs a listening test.** |
+| 13 | **Stumble recovery within ~1s** — settled as forgiven, but is the 9.5 score right, or should recovery be free and only *duration* matter? | Phase 5½ | **Working assumption, worth revisiting after real use.** |
 
 ---
 
