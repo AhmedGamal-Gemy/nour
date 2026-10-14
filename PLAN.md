@@ -48,10 +48,10 @@ Where Nour wins:
 | Progress signal | streaks, heatmaps (activity) | retention decay model |
 | Test placement | user-chosen | scheduled from weakness |
 | Weakness signal | recent errors | decay + hesitation + neighbour anchoring |
-| Recitation direction | forward | forward **and** backward (تراجع) |
+| Recitation direction | forward | **continuous run, no restart** |
 | On a clean recitation | nothing happens | **mutashabihat challenge** |
-| Hesitation | not tracked | first-class signal |
-| Pronunciation | — | madd / ghunnah measurement (later) |
+| Hesitation | not tracked | first-class signal — drives the prompt ladder |
+| Pronunciation | — | phoneme + sifat, via `quran-muaalem` |
 
 A Tarteel user review explicitly requests the hesitation-prompt feature we are
 designing. It does not exist yet.
@@ -83,8 +83,61 @@ Consequences:
 
 ---
 
-## 3. Architecture decision
+## 2b. The session — what this actually is
 
+Derived from how the developer practises with his sheikh, and the reason nour
+exists. Everything else in this plan serves this loop.
+
+### The loop
+
+```
+1. AGENDA     App suggests a portion. "Today: Al-Mulk 1–10."
+              Suggested from sequence and what is decaying. Overridable —
+              name another surah and it follows you there.
+
+2. BEGIN      You start reciting from memory, unprompted.
+              No voice plays. No prompt. You begin because you know what
+              today is. Maqam: the mic opens and the app is silent.
+
+3. TRACK      The app knows every word that should come and follows you
+              through it. It does not speak. It does not react.
+
+4. LADDER     On a stall, it descends three rungs (see Phase 5):
+              wait ~1s → first letter → full word
+              Each rung costs more. Recovery at a lower rung costs less.
+
+5. CONTINUE   The run never restarts. A correction is a pause, not a reset.
+              You carry on from where the ladder left you.
+
+6. SCORE      One run, one score, attached to the segment.
+              Clean = 10. Recovered stumble = 9.5. Hint = −0.5, full word
+              = −1.0. Repeated failure on the same ayah halves its share.
+
+7. WISDOM     Only if the run was clean: a mutashabihat question, as
+              encouragement and a bonus. Never the main event.
+```
+
+### What the app is
+
+A listening teacher. It sets the agenda, knows the text, follows silently,
+and catches you at the exact word. Not a recorder you check afterwards, and
+not a reciter that plays at you.
+
+### What makes this hard
+
+The whole difficulty is **step 4** — knowing a stall from a pause from a
+mistake, in real time, on hesitant recitation, without falsely correcting a
+correct recitation. That is §4.4, and it is the only genuinely unsolved
+engineering problem in the product.
+
+### Deliberately excluded
+
+- **Backward recitation (تراجع)** — not part of this practice. Out.
+- **Restart on error** — the run is continuous by design.
+- **Audio correction** — the word is spoken, not played by a reciter, by
+  default. Reference playback is optional and separate.
+
+## 3. Architecture decision
 **Framework: Pipecat** (BSD-2, active, 16k+ stars).
 
 Rationale:
@@ -378,7 +431,7 @@ Per-ayah, with:
   retained → lapsed
 - `last_recited_at`, `last_tested_at` (§4.3)
 - `consecutive_clean`, decaying `recent_error_rate`, `hesitation_count`
-- `recall_direction` — forward / backward
+- `rung_reached` — deepest rung the user needed on this ayah, by attempt
 
 Scheduling:
 
@@ -394,16 +447,16 @@ The competence model is not a passive record. It is the **input to every
 downstream decision**, which is why it is the product rather than a feature:
 
 - **← Phase 3 (scoring).** Alignment and scoring produce the evidence. Every
-  error class, hesitation event, and hesitation outcome writes into a per-ayah
+  error class, hesitation event, and rung reached writes into a per-ayah
   competence record. Without scoring there is nothing to model.
-- **→ Phase 5 (hesitation policy).** `P(failure | hesitation, context)` is
-  *computed from the competence history* — it is not a static per-user setting.
-  The hesitation events recorded against each ayah are exactly the samples the
-  policy is estimated from.
+- **→ Phase 5 (prompt ladder).** Not a policy — the ladder is fixed, only the
+  wait durations are tunable. The competence history supplies the starting
+  durations per user rather than them being global constants.
 - **→ Phase 6 (feedback).** Competence state decides **whether** feedback is
   warranted and how urgently. A lapsed ayah gets immediate intervention; an
-  already-fluent ayah does not need correction noise. The hesitation policy
-  decides *when* to speak; competence state decides *whether it matters*.
+  already-fluent ayah does not need correction noise.
+- **→ Phase 5½ (scoring).** The halving rule reads competence history: whether
+  this ayah has failed before determines whether a new failure halves it.
 - **→ Phase 7 (mutashabihat challenge).** Challenge selection is gated on
   competence state. Probe what is strong to deepen it, consolidate what is
   shaky. **Never challenge something the user cannot yet recite** — that is
@@ -413,35 +466,69 @@ Downstream phases read competence state rather than making independent
 judgements. If a later phase needs to decide something, it asks the competence
 model first.
 
-### Phase 5 — Adaptive hesitation policy
+### Phase 5 — The prompt ladder
 
-Per-user learned policy, not a hardcoded rule. Its evidence is the competence
-model's hesitation history (§Phase 4) — this phase estimates a policy over that
-history rather than keeping a separate record of its own.
+**Not a learned policy.** A fixed three-rung ladder with one tunable: how long
+silence may run at each rung. Established with the developer from how his sheikh
+actually corrects him, replacing an earlier `P(failure | hesitation)` design that
+was over-built.
 
-- Log every hesitation: duration, position, outcome (recalled within Ns / failed)
-- Maintain `P(failure | hesitation, context)` per user
-- Prompt when it crosses a threshold
+```
+you stumble
+   ↓
+RUNG 0: app waits ~1s          ← you may find it yourself (no cost)
+   ↓
+RUNG 1: first letter(s) spoken ← usually enough    → −0.5
+   ↓
+RUNG 2: the full word spoken   ← genuinely lost    → −1.0
+   ↓
+you carry on either way — NO RESTART
+```
 
-Guardrails:
+Costs are equal, but rung 1 costs half because it *worked*: the memory was there
+and only needed the door opened.
 
-- **Cold start is optimistic** — silent, generous timeout. Eager prompting in
-  early sessions would feel hostile and teach distrust.
-- **Pool globally, smooth per-passage.** Strong global prior, local nudges. 20
-  hesitation samples per ayah is not a signal.
-- **Never prompt when they are reciting correctly** — only after a demonstrated
-  failure.
+Details:
 
-### Phase 6 — Feedback and reference playback
+- All feedback is **spoken** (voice interaction throughout). The mic pauses while
+  the app speaks — no voice-over-voice, and no AEC needed.
+- Rung durations are user-tunable. Start at ~1s, adjust against real practice.
+- **Never rung below a correct recitation.** Only after a demonstrated stall.
+- Wait at least a natural pause — never interrupt mid-word (see §4.2).
 
-Competence state gates what gets feedback (§Phase 4); the hesitation policy
-gates when (§Phase 5). This phase decides *how*.
+Why not a learned policy: the ladder is fixed by how correction actually works.
+The only open variable is timing, and that is one number the user can tune.
+Learning it was solving a problem that does not exist.
 
-- Prompt at mandatory / permitted waqf marks, ayah boundaries, or breath pauses
-- Play reference recitation from the point of failure; user-selectable reciter
-  (preference here is strong and personal)
-- Resolve the AEC / capture-pause question (§7.3)
+### Phase 6 — Feedback delivery
+
+How the ladder reaches the user, and what is recorded.
+
+- Spoken rungs, mic muted during speech, resumed on completion
+- Waqf-aware: only prompt where the reciter was always going to pause (§4.2)
+- Reference recitation playback is **optional and separate** — the default
+  correction is the word itself, not a reciter's voice
 - Feedback history, browsable
+- Per-intervention records feed the competence model (§Phase 4)
+
+### Phase 5½ — Scoring
+
+A session is **one continuous run** through the suggested portion. Corrections
+are pauses, not resets — the run never restarts.
+
+| Event | Cost |
+|---|---|
+| Recovered unaided | −0.5 |
+| Rung 1 hint, then correct | −0.5 |
+| Rung 2 full word | −1.0 |
+| Same ayah failing again | its contribution halves |
+
+- The score attaches to the **segment** ("Al-Mulk 1–10 = 7/10"), not the ayah.
+- A recovered stumble is a 9.5, not a 10 — small cost, not fatal.
+- Repeated failure on the same ayah is the real signal: one miss is forgiven,
+  three in a row says the junction is not solid.
+- The halving rule is the only decay-like mechanic in scoring; §Phase 4 handles
+  the rest over time.
 
 ### Phase 7 — Mutashabihat challenge *(the differentiator)*
 
