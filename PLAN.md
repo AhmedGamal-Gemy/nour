@@ -681,6 +681,7 @@ nour/
 │   │   └── content/            qursim, tajweed, Quran text access
 │   └── tests/
 ├── frontend/                   Vite + React + TS
+├── docs/                       product maps (diagrams), design notes
 ├── data/                       versioned corpora
 ├── models/                     downloaded weights (gitignored)
 ├── eval/

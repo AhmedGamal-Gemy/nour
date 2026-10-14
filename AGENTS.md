@@ -151,7 +151,9 @@ nour/
 │   └── opencode.jsonc   project agent config (watcher, permissions)
 ├── .gitattributes       LF normalization; binaries marked
 ├── AGENTS.md            this file
-└── PLAN.md              architecture, roadmap, design constraints
+├── PLAN.md              architecture, roadmap, design constraints
+├── docs/                product maps (Mermaid diagrams, render on GitHub)
+├── research/            evidence trail + 00-FINDINGS.md synthesis
 ```
 
 The layout for `backend/`, `frontend/`, `eval/`, `data/` and `docker/` is
