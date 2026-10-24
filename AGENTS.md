@@ -152,7 +152,7 @@ nour/
 ├── .gitattributes       LF normalization; binaries marked
 ├── AGENTS.md            this file
 ├── PLAN.md              architecture, roadmap, design constraints
-├── docs/                product maps (Mermaid diagrams, render on GitHub)
+├── docs/                product maps, recording guide, design notes
 ├── research/            evidence trail + 00-FINDINGS.md synthesis
 ```
 
