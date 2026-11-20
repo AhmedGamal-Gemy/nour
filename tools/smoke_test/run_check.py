@@ -9,6 +9,7 @@ at the phoneme/tashkeel level.
 """
 
 import argparse
+import difflib
 
 import torch
 from librosa.core import load
@@ -46,6 +47,18 @@ def main():
     wave, _ = load(args.wav, sr=16000, mono=True)
     out = muaalem([wave], [ref], sampling_rate=16000)[0]
 
+    print(f"Expected phonemes: {ref.phonemes}")
+    print(f"Heard phonemes:    {out.phonemes.text}\n")
+
+    sm = difflib.SequenceMatcher(a=ref.phonemes, b=out.phonemes.text)
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            continue
+        print(
+            f"  {tag}: expected {ref.phonemes[i1:i2]!r} -> heard {out.phonemes.text[j1:j2]!r}"
+        )
+
+    print()
     explain_for_terminal(
         phonemes=out.phonemes.text,
         exp_phonemes=ref.phonemes,
