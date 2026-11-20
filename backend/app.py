@@ -62,6 +62,15 @@ PROBE_START_FRACTION = 0.6
 # Minimum spacing between duration-triggered checks - each one is a full
 # model inference, so this caps how much CPU a long ayah burns on retries.
 PROBE_INTERVAL_S = 0.5
+# Multiple of the estimated duration past which a duration-triggered check
+# finalizes no matter what, instead of waiting for heard_len to reach
+# expected_len. Without this, a real gap in the recitation (heard_len
+# staying short of expected for reasons that have nothing to do with the
+# ayah being unfinished) just keeps waiting - and the only way it can ever
+# reach the target length is by swallowing audio from the *next* ayah to
+# make up the shortfall. Better to cut on time and show the real mismatch
+# (including what's still missing) than to risk eating into what's next.
+PROBE_MAX_FRACTION = 1.6
 
 
 def estimate_duration_s(sura: int, aya: int) -> float:
@@ -142,8 +151,14 @@ async def recite(ws: WebSocket):
                 # threshold is fine once someone's gone quiet, but cutting
                 # a still-in-progress ayah at ~85% and scoring it against
                 # the full text is a guaranteed false fail on content that
-                # just hadn't finished yet).
-                if heard_len < expected_len:
+                # just hadn't finished yet) - unless we've waited so long
+                # that this can't be "still in progress" anymore; a real
+                # gap in the recitation can keep heard_len short forever,
+                # and waiting past that just risks eating the next ayah's
+                # audio to make up the shortfall instead.
+                buf_dur = len(candidate) / segmenter.sr
+                overdue = buf_dur >= PROBE_MAX_FRACTION * expected_duration
+                if heard_len < expected_len and not overdue:
                     continue
             else:
                 complete_enough = heard_len >= COMPLETENESS_RATIO * expected_len
