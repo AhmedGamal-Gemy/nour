@@ -6,6 +6,7 @@ Uthmani text and let the phoneme-level model catch mismatches.
 
 import difflib
 
+import numpy as np
 import torch
 from librosa.core import load
 
@@ -32,12 +33,14 @@ def get_muaalem(device: str | None = None) -> Muaalem:
     return _muaalem_by_device[device]
 
 
-def check_ayah(sura: int, aya: int, wav_path: str, device: str | None = None) -> dict:
+def check_wave(
+    sura: int, aya: int, wave: np.ndarray, device: str | None = None
+) -> dict:
+    """Same comparison as check_ayah, but on an already-loaded 16kHz mono array."""
     fmt = Aya(sura, aya).get()
     ref = quran_phonetizer(fmt.uthmani, MOSHAF, remove_spaces=True)
 
     muaalem = get_muaalem(device)
-    wave, _ = load(wav_path, sr=16000, mono=True)
     out = muaalem([wave], [ref], sampling_rate=16000)[0]
 
     mismatches = []
@@ -62,3 +65,8 @@ def check_ayah(sura: int, aya: int, wav_path: str, device: str | None = None) ->
         "mismatches": mismatches,
         "passed": len(mismatches) == 0,
     }
+
+
+def check_ayah(sura: int, aya: int, wav_path: str, device: str | None = None) -> dict:
+    wave, _ = load(wav_path, sr=16000, mono=True)
+    return check_wave(sura, aya, wave, device=device)
