@@ -1,11 +1,12 @@
-"""Reference client for /ws/recite: streams a wav file as if it were a live mic.
+"""Reference client for /ws/recite: streams wav files as if from a live mic,
+one continuous session, one or more ayahs in sequence.
 
 Swap `iter_frames` for real microphone capture and this is most of a real
-client. Useful on its own too: feed it a full recitation session's worth
-of audio concatenated with real pauses between ayahs.
+client.
 
 Usage:
-    python -m backend.simulate_stream --sura 53 --aya 1 ws://127.0.0.1:8000/ws/recite tools/smoke_test/correct.wav
+    python -m backend.simulate_stream --sura 53 --aya 1 ws://127.0.0.1:8000/ws/recite \
+        tools/smoke_test/correct.wav tools/smoke_test/wrong.wav
 """
 
 import argparse
@@ -30,10 +31,18 @@ def iter_frames(wav_path: str):
         yield pcm16[i : i + FRAME_LEN].tobytes()
 
 
+async def receive_loop(ws):
+    try:
+        async for msg in ws:
+            print(msg)
+    except Exception:
+        pass
+
+
 async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("url")
-    parser.add_argument("wav")
+    parser.add_argument("wavs", nargs="+", help="one or more wav files, streamed in order")
     parser.add_argument("--sura", type=int)
     parser.add_argument("--aya", type=int)
     args = parser.parse_args()
@@ -44,12 +53,15 @@ async def main():
             start = {"sura": args.sura, "aya": args.aya}
         await ws.send(json.dumps(start))
 
-        for frame in iter_frames(args.wav):
-            await ws.send(frame)
-            await asyncio.sleep(FRAME_MS / 1000)
+        receiver = asyncio.create_task(receive_loop(ws))
 
-        msg = await ws.recv()
-        print(msg)
+        for wav_path in args.wavs:
+            for frame in iter_frames(wav_path):
+                await ws.send(frame)
+                await asyncio.sleep(FRAME_MS / 1000)
+
+        await asyncio.sleep(1.0)  # let the last segment's result arrive
+        receiver.cancel()
 
 
 if __name__ == "__main__":
