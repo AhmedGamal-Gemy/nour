@@ -2,5 +2,6 @@
 __pycache__/
 *.pyc
 tools/smoke_test/*.wav
+tools/smoke_test/fillers/
 data/session_state.json
 data/results.jsonl
