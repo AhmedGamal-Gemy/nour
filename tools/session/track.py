@@ -33,7 +33,10 @@ def save_state(sura: int, aya: int) -> None:
     STATE_PATH.write_text(json.dumps({"sura": sura, "aya": aya}))
 
 
-def log_result(result: dict) -> None:
+def log_result(result: dict, skipped: bool = False) -> None:
+    """skipped=True marks an ayah left behind unresolved - the reciter moved
+    on to the next ayah without ever passing this one, as opposed to a plain
+    fail (which implies a retry is expected)."""
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     entry = {
         "date": datetime.date.today().isoformat(),
@@ -42,6 +45,8 @@ def log_result(result: dict) -> None:
         "passed": result["passed"],
         "mismatches": result["mismatches"],
     }
+    if skipped:
+        entry["skipped"] = True
     with LOG_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 

@@ -20,7 +20,12 @@ Protocol on /ws/recite:
      one JSON message:
        {"sura":.., "aya":.., "uthmani":.., "passed":.., "mismatches":[...]}
      On a pass it advances to the next ayah and keeps listening there.
-     On a fail it stays on the same ayah so the next segment retries it.
+  4. On a fail, the *next* segment is checked against two candidates: the
+     same ayah (a retry) and the next one (in case the reciter moved on
+     anyway without passing). Whichever matches better wins. If the next
+     ayah wins, the failed one is logged as skipped (left unresolved, not
+     retried) rather than silently staying stuck forever comparing new
+     audio against old text.
 
 This is chunk-based near-real-time, not live word-by-word decoding -
 Quran Muaalem compares a finished clip against the reference, it does
@@ -90,6 +95,9 @@ async def recite(ws: WebSocket):
     segmenter = SilenceSegmenter()
     expected_duration = estimate_duration_s(sura, aya)
     last_probe_at = time.monotonic()
+    # Set after a fail: the next segment gets checked against both this
+    # ayah (retry) and the one after it (maybe they moved on anyway).
+    fallback_sura, fallback_aya = None, None
 
     try:
         while True:
@@ -148,6 +156,18 @@ async def recite(ws: WebSocket):
                     # Else: a VAD pause long enough that it's clearly not
                     # a breath - fall through and finalize anyway.
 
+            # The ayah before this one failed, so this segment is
+            # ambiguous: a retry, or they moved on anyway. Check both and
+            # take whichever one actually matches.
+            if fallback_sura is not None:
+                fallback_result = await loop.run_in_executor(
+                    None, check_wave, fallback_sura, fallback_aya, candidate
+                )
+                if len(fallback_result["mismatches"]) < len(result["mismatches"]):
+                    log_result(result, skipped=True)
+                    result = fallback_result
+                    sura, aya = fallback_sura, fallback_aya
+
             segmenter.finalize()
             last_probe_at = time.monotonic()
             log_result(result)
@@ -163,6 +183,7 @@ async def recite(ws: WebSocket):
             )
 
             if result["passed"]:
+                fallback_sura, fallback_aya = None, None
                 current = Aya(sura, aya)
                 if current.is_last():
                     save_state(sura, aya)
@@ -174,5 +195,11 @@ async def recite(ws: WebSocket):
                     expected_duration = estimate_duration_s(sura, aya)
             else:
                 save_state(sura, aya)
+                current = Aya(sura, aya)
+                if current.is_last():
+                    fallback_sura, fallback_aya = None, None
+                else:
+                    nxt = current.step(1).get()
+                    fallback_sura, fallback_aya = nxt.sura_idx, nxt.aya_idx
     except WebSocketDisconnect:
         pass
