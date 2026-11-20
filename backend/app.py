@@ -17,7 +17,13 @@ Protocol on /ws/recite:
 This is chunk-based near-real-time, not live word-by-word decoding -
 Quran Muaalem compares a finished clip against the reference, it does
 not do streaming ASR. See CLAUDE.md section 4.
+
+Each check runs in a thread pool executor, not inline on the event loop:
+model inference takes a few seconds, and running it inline would freeze
+every other connection (including health checks) for that long.
 """
+
+import asyncio
 
 import numpy as np
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
@@ -60,7 +66,14 @@ async def recite(ws: WebSocket):
             if segment is None:
                 continue
 
-            result = check_wave(sura, aya, segment)
+            # check_wave is synchronous and CPU-bound (model inference); run
+            # it off the event loop or every other connection - including
+            # health checks and this one's own pings - freezes for its
+            # duration.
+            loop = asyncio.get_running_loop()
+            result = await loop.run_in_executor(
+                None, check_wave, sura, aya, segment
+            )
             log_result(result)
 
             await ws.send_json(
