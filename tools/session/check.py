@@ -13,18 +13,29 @@ from librosa.core import load
 from quran_transcript import Aya, MoshafAttributes, quran_phonetizer
 from quran_muaalem import Muaalem
 
-# Common Hafs defaults (murattal). madd_aared_len=4 and madd_monfasel_len=4
-# (not the README example's 2 for both): both tested against real
-# recitations - 2 produced a systematic false mismatch (stop-elongation and
-# the separate-madd-before-hamza case both came out too short against
-# standard practice). These do not change the hard "exact tashkeel"
-# comparison, just which elongation length counts as correct.
+# Common Hafs defaults (murattal).
+#
+# madd_monfasel_len=4 (not the README example's 2): tested against 3
+# independent professional reciters on the same ayah (Al-Qadr 97:1,
+# "إِنَّآ" before the following word's hamza) - all 3 showed the identical
+# mismatch at 2, all 3 matched exactly at 4.
+#
+# madd_aared_len is deliberately left at the library's default (2), not 4.
+# aared only applies when the reciter actually *stops* on that word; a
+# dataset clip cut from a continuous recitation where they flowed into the
+# next ayah never gets aared treatment at all, it's just natural 2-count
+# madd. That's a property of the specific take, not of the text - checked
+# against Al-Fatiha 1:1/1:2/1:4 (clean matches at 2) and 1:6 (needs 4) from
+# the same reciter in the same recording. A fixed default can't win both;
+# 2 is the safer net default on current evidence, not a settled answer.
+# The real fix is context-aware (apply aared only when a genuine pause was
+# detected ending the segment), not a fixed config value - future work.
 MOSHAF = MoshafAttributes(
     rewaya="hafs",
     madd_monfasel_len=4,
     madd_mottasel_len=4,
     madd_mottasel_waqf=4,
-    madd_aared_len=4,
+    madd_aared_len=2,
 )
 
 _muaalem_by_device = {}
