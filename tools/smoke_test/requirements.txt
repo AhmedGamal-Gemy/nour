@@ -1,0 +1,4 @@
+quran-muaalem
+librosa
+numba>=0.61.2
+transformers<5
