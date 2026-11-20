@@ -7,9 +7,13 @@ Protocol on /ws/recite:
   2. Client then streams binary frames: raw PCM16LE, mono, 16kHz. Frame
      size isn't fixed, but small (~20ms, 640 bytes) is what the pause
      detector in vad.py is tuned around.
-  3. Whenever the segmenter decides enough speech was followed by enough
-     silence, the server runs the same exact-tashkeel check used by the
-     CLI tools and sends back one JSON message:
+  3. Whenever the segmenter signals a candidate pause, the server checks
+     the buffered audio so far against the reference. If what's been heard
+     is clearly shorter than the expected ayah, it's treated as a breath:
+     nothing is sent, the buffer is kept, and listening continues. Only
+     once the heard content is close to the full expected length (or the
+     silence has gone on long enough that it's clearly not a breath
+     anymore) does it finalize and send one JSON message:
        {"sura":.., "aya":.., "uthmani":.., "passed":.., "mismatches":[...]}
      On a pass it advances to the next ayah and keeps listening there.
      On a fail it stays on the same ayah so the next segment retries it.
@@ -32,6 +36,12 @@ from quran_transcript import Aya
 from backend.vad import SilenceSegmenter
 from tools.session.check import check_wave
 from tools.session.track import load_state, log_result, save_state
+
+# How close the heard phoneme count must be to the expected count before a
+# pause is treated as the end of the ayah rather than a breath. Length, not
+# content, on purpose - a tashkeel mistake doesn't change how many phonemes
+# were said, only which ones, so this doesn't mask the thing we're checking for.
+COMPLETENESS_RATIO = 0.85
 
 app = FastAPI()
 
@@ -62,8 +72,8 @@ async def recite(ws: WebSocket):
         while True:
             chunk = await ws.receive_bytes()
             frame = np.frombuffer(chunk, dtype=np.int16).astype(np.float32) / 32768.0
-            segment = segmenter.push(frame)
-            if segment is None:
+            candidate = segmenter.push(frame)
+            if candidate is None:
                 continue
 
             # check_wave is synchronous and CPU-bound (model inference); run
@@ -72,8 +82,19 @@ async def recite(ws: WebSocket):
             # duration.
             loop = asyncio.get_running_loop()
             result = await loop.run_in_executor(
-                None, check_wave, sura, aya, segment
+                None, check_wave, sura, aya, candidate
             )
+
+            heard_len = len(result["heard_phonemes"])
+            expected_len = len(result["expected_phonemes"])
+            complete_enough = heard_len >= COMPLETENESS_RATIO * expected_len
+            if not complete_enough and not segmenter.is_long_silence():
+                # Looks like a breath, not the end of the ayah: don't report
+                # anything, keep the buffer, keep listening.
+                segmenter.resume()
+                continue
+
+            segmenter.finalize()
             log_result(result)
 
             await ws.send_json(
