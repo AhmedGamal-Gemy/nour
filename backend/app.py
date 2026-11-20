@@ -127,19 +127,26 @@ async def recite(ws: WebSocket):
 
             heard_len = len(result["heard_phonemes"])
             expected_len = len(result["expected_phonemes"])
-            complete_enough = heard_len >= COMPLETENESS_RATIO * expected_len
-            if not complete_enough:
-                if duration_triggered:
-                    # Not done yet - this was a peek, not a VAD candidate,
-                    # so there's no VAD state to undo. Keep listening.
+            if duration_triggered:
+                # No pause happened - cutting here is a guess, not a
+                # response to the reciter actually stopping. Require the
+                # full expected length, not just "mostly there" (that
+                # threshold is fine once someone's gone quiet, but cutting
+                # a still-in-progress ayah at ~85% and scoring it against
+                # the full text is a guaranteed false fail on content that
+                # just hadn't finished yet).
+                if heard_len < expected_len:
                     continue
-                if not segmenter.is_long_silence():
-                    # Looks like a breath, not the end of the ayah: don't
-                    # report anything, keep the buffer, keep listening.
-                    segmenter.resume()
-                    continue
-                # Else: a VAD pause that's gone on long enough that it's
-                # clearly not a breath - fall through and finalize anyway.
+            else:
+                complete_enough = heard_len >= COMPLETENESS_RATIO * expected_len
+                if not complete_enough:
+                    if not segmenter.is_long_silence():
+                        # Looks like a breath, not the end of the ayah:
+                        # don't report anything, keep listening.
+                        segmenter.resume()
+                        continue
+                    # Else: a VAD pause long enough that it's clearly not
+                    # a breath - fall through and finalize anyway.
 
             segmenter.finalize()
             last_probe_at = time.monotonic()
