@@ -216,5 +216,13 @@ async def recite(ws: WebSocket):
                 else:
                     nxt = current.step(1).get()
                     fallback_sura, fallback_aya = nxt.sura_idx, nxt.aya_idx
+                    # Probing now has to watch for either candidate
+                    # finishing - use whichever is shorter so the start
+                    # threshold and the overdue cap don't end up based on
+                    # the wrong (possibly much longer) one.
+                    expected_duration = min(
+                        expected_duration,
+                        estimate_duration_s(fallback_sura, fallback_aya),
+                    )
     except WebSocketDisconnect:
         pass
