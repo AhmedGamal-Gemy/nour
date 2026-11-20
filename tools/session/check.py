@@ -13,14 +13,17 @@ from librosa.core import load
 from quran_transcript import Aya, MoshafAttributes, quran_phonetizer
 from quran_muaalem import Muaalem
 
-# Common Hafs defaults (murattal). Revisit once we care about a specific
-# reciter style; these do not change the hard "exact tashkeel" comparison.
+# Common Hafs defaults (murattal). madd_aared_len=4 (not the README example's
+# 2): tested against real recitations and 2 produced a systematic false
+# mismatch at the end of nearly every ayah - every stop-elongation came out
+# too short against standard practice. These do not change the hard "exact
+# tashkeel" comparison, just which elongation length counts as correct.
 MOSHAF = MoshafAttributes(
     rewaya="hafs",
     madd_monfasel_len=2,
     madd_mottasel_len=4,
     madd_mottasel_waqf=4,
-    madd_aared_len=2,
+    madd_aared_len=4,
 )
 
 _muaalem_by_device = {}
