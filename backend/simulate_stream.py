@@ -12,6 +12,7 @@ Usage:
 import argparse
 import asyncio
 import json
+import time
 
 import numpy as np
 from librosa.core import load
@@ -31,10 +32,11 @@ def iter_frames(wav_path: str):
         yield pcm16[i : i + FRAME_LEN].tobytes()
 
 
-async def receive_loop(ws):
+async def receive_loop(ws, last_msg_at: list[float]):
     try:
         async for msg in ws:
             print(msg)
+            last_msg_at[0] = time.monotonic()
     except Exception:
         pass
 
@@ -53,14 +55,27 @@ async def main():
             start = {"sura": args.sura, "aya": args.aya}
         await ws.send(json.dumps(start))
 
-        receiver = asyncio.create_task(receive_loop(ws))
+        last_msg_at = [time.monotonic()]
+        receiver = asyncio.create_task(receive_loop(ws, last_msg_at))
 
         for wav_path in args.wavs:
             for frame in iter_frames(wav_path):
                 await ws.send(frame)
                 await asyncio.sleep(FRAME_MS / 1000)
 
-        await asyncio.sleep(1.0)  # let the last segment's result arrive
+        # Inference on CPU can take real seconds per segment, and a session
+        # can have several segments (several ayahs). Wait until the server
+        # has gone quiet for IDLE_S seconds, not a fixed short sleep - a
+        # fixed sleep is long enough for one ayah's inference and too
+        # short the moment there's more than one.
+        last_msg_at[0] = time.monotonic()
+        IDLE_S, MAX_WAIT_S = 5.0, 120.0
+        start_wait = time.monotonic()
+        while (
+            time.monotonic() - last_msg_at[0] < IDLE_S
+            and time.monotonic() - start_wait < MAX_WAIT_S
+        ):
+            await asyncio.sleep(0.5)
         receiver.cancel()
 
 
