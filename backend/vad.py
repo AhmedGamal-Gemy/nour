@@ -49,10 +49,12 @@ class SilenceSegmenter:
             self.silence_run = 0
             self.speech_frames += 1
 
+        enough_speech = self.speech_frames >= self.min_speech_frames
+        long_silence = self.silence_run >= self.max_silence_frames
         if (
             not self.pending
-            and self.speech_frames >= self.min_speech_frames
             and self.silence_run >= self.silence_frames_needed
+            and (enough_speech or long_silence)
         ):
             self.pending = True
             return self.buffer.copy()
@@ -75,6 +77,10 @@ class SilenceSegmenter:
 
     def resume(self) -> None:
         """Caller decided the candidate was just a breath: keep the buffer,
-        keep listening, allow the next pause to signal a new candidate."""
+        keep listening. Also resets speech_frames, not just silence_run - a
+        candidate shouldn't fire again every silence_ms for as long as the
+        breath continues, only once real speech resumes (or is_long_silence
+        trips as a safety net for a stalled attempt)."""
         self.silence_run = 0
+        self.speech_frames = 0
         self.pending = False
