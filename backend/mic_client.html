@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>nour - live mic test</title>
+<style>
+  body { font-family: sans-serif; max-width: 640px; margin: 2rem auto; }
+  #log { margin-top: 1rem; }
+  #log div { padding: 0.4rem 0.6rem; margin-bottom: 0.3rem; border-radius: 4px; font-family: monospace; font-size: 0.85rem; white-space: pre-wrap; }
+  .pass { background: #dfd; }
+  .fail { background: #fdd; }
+  .other { background: #eee; }
+  label { margin-right: 1rem; }
+  input { width: 4rem; }
+</style>
+</head>
+<body>
+  <h2>nour - live mic test</h2>
+  <p>Run the server first: <code>uvicorn backend.app:app --host 127.0.0.1 --port 8000</code></p>
+  <label>Sura <input id="sura" type="number" value="53" /></label>
+  <label>Aya <input id="aya" type="number" value="1" /></label>
+  <button id="start">Start</button>
+  <button id="stop" disabled>Stop</button>
+  <div id="log"></div>
+
+<script>
+let ws, audioCtx, processor, source, silentGain, stream;
+
+function log(text, cls) {
+  const div = document.createElement('div');
+  div.className = cls || 'other';
+  div.textContent = text;
+  document.getElementById('log').prepend(div);
+}
+
+// Browsers give mic audio at their own sample rate (usually 44.1k/48k) -
+// the server expects 16kHz mono PCM16. Simple nearest-sample resampling;
+// good enough for this test, not audio-quality-critical.
+function downsampleTo16k(buffer, inputSampleRate) {
+  const ratio = inputSampleRate / 16000;
+  const newLength = Math.round(buffer.length / ratio);
+  const result = new Float32Array(newLength);
+  for (let i = 0; i < newLength; i++) {
+    result[i] = buffer[Math.floor(i * ratio)];
+  }
+  return result;
+}
+
+function floatTo16BitPCM(float32) {
+  const buf = new ArrayBuffer(float32.length * 2);
+  const view = new DataView(buf);
+  for (let i = 0; i < float32.length; i++) {
+    const s = Math.max(-1, Math.min(1, float32[i]));
+    view.setInt16(i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+  }
+  return buf;
+}
+
+document.getElementById('start').onclick = async () => {
+  const sura = parseInt(document.getElementById('sura').value, 10);
+  const aya = parseInt(document.getElementById('aya').value, 10);
+
+  ws = new WebSocket('ws://localhost:8000/ws/recite');
+  ws.onopen = () => {
+    ws.send(JSON.stringify({ sura, aya }));
+    log(`connected, starting at ${sura}:${aya}`, 'other');
+  };
+  ws.onmessage = (ev) => {
+    const data = JSON.parse(ev.data);
+    const cls = data.passed === true ? 'pass' : data.passed === false ? 'fail' : 'other';
+    log(JSON.stringify(data, null, 2), cls);
+  };
+  ws.onclose = () => log('connection closed', 'other');
+  ws.onerror = () => log('websocket error - is the server running on port 8000?', 'fail');
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (err) {
+    log('mic permission denied or unavailable: ' + err, 'fail');
+    return;
+  }
+
+  audioCtx = new AudioContext();
+  source = audioCtx.createMediaStreamSource(stream);
+  // ScriptProcessorNode is deprecated but simplest for a one-file test;
+  // needs to be connected to the graph (even through a silent gain) or
+  // some browsers won't fire onaudioprocess at all.
+  processor = audioCtx.createScriptProcessor(4096, 1, 1);
+  silentGain = audioCtx.createGain();
+  silentGain.gain.value = 0;
+  source.connect(processor);
+  processor.connect(silentGain);
+  silentGain.connect(audioCtx.destination);
+
+  processor.onaudioprocess = (e) => {
+    const input = e.inputBuffer.getChannelData(0);
+    const down = downsampleTo16k(input, audioCtx.sampleRate);
+    const pcm16 = floatTo16BitPCM(down);
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send(pcm16);
+    }
+  };
+
+  document.getElementById('start').disabled = true;
+  document.getElementById('stop').disabled = false;
+};
+
+document.getElementById('stop').onclick = () => {
+  if (processor) processor.disconnect();
+  if (source) source.disconnect();
+  if (silentGain) silentGain.disconnect();
+  if (stream) stream.getTracks().forEach((t) => t.stop());
+  if (ws) ws.close();
+  document.getElementById('start').disabled = false;
+  document.getElementById('stop').disabled = true;
+};
+</script>
+</body>
+</html>
