@@ -41,8 +41,20 @@ MOSHAF = MoshafAttributes(
 _muaalem_by_device = {}
 
 
+def detect_device() -> str:
+    """cuda > mps (Apple Silicon) > cpu. torch.cuda.is_available() is False
+    on a Mac GPU, so checking only that silently falls back to CPU even
+    when an MPS device is sitting right there - Muaalem's engine documents
+    mps as a supported device, so there's no reason not to use it."""
+    if torch.cuda.is_available():
+        return "cuda"
+    if torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
+
 def get_muaalem(device: str | None = None) -> Muaalem:
-    device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+    device = device or detect_device()
     if device not in _muaalem_by_device:
         _muaalem_by_device[device] = Muaalem(device=device)
     return _muaalem_by_device[device]
