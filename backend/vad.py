@@ -66,10 +66,20 @@ class SilenceSegmenter:
         for a stalled or abandoned attempt."""
         return self.silence_run >= self.max_silence_frames
 
-    def finalize(self) -> np.ndarray:
-        """Caller confirms this candidate is a real ayah boundary."""
+    def finalize(self, keep_tail_from: int | None = None) -> np.ndarray:
+        """Caller confirms this candidate is a real ayah boundary. Returns
+        the full segment that was checked. If keep_tail_from is given (a
+        sample index into that segment), the buffer isn't cleared to empty -
+        it's reset to segment[keep_tail_from:], the part of this audio that
+        actually belongs to whatever comes next. That audio was already
+        recorded; reusing it as the start of the next segment means it
+        doesn't need to be heard again live, and no real content is lost
+        between one ayah and the next."""
         segment = self.buffer.copy()
-        self.buffer = np.zeros(0, dtype=np.float32)
+        if keep_tail_from is None:
+            self.buffer = np.zeros(0, dtype=np.float32)
+        else:
+            self.buffer = segment[keep_tail_from:].copy()
         self.silence_run = 0
         self.speech_frames = 0
         self.pending = False

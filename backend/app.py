@@ -20,12 +20,19 @@ Protocol on /ws/recite:
      one JSON message:
        {"sura":.., "aya":.., "uthmani":.., "passed":.., "mismatches":[...]}
      On a pass it advances to the next ayah and keeps listening there.
-  4. On a fail, the *next* segment is checked against two candidates: the
-     same ayah (a retry) and the next one (in case the reciter moved on
-     anyway without passing). Whichever matches better wins. If the next
-     ayah wins, the failed one is logged as skipped (left unresolved, not
-     retried) rather than silently staying stuck forever comparing new
-     audio against old text.
+  4. Finalizing uses the timed decode (tools/session/timed_check.py) so it
+     has each phoneme's audio position, not just its text. If the heard
+     content runs past this ayah's own text - a trailing block that
+     doesn't match anything in it - that block almost certainly belongs to
+     whatever is recited next, not to this ayah. It's split off before
+     scoring (no re-running the model on cut audio: a model that uses
+     surrounding context to decode each part gets *worse*, not better,
+     once that context is removed) and the matching audio is kept, not
+     discarded, as the start of the next segment's buffer. Position always
+     advances when a split happens, whether this ayah passed or not -
+     finding a trailing block is itself evidence the reciter already moved
+     on, which is exactly the case a plain pass/fail check can't tell apart
+     from "stay here and keep waiting."
 
 This is chunk-based near-real-time, not live word-by-word decoding -
 Quran Muaalem compares a finished clip against the reference, it does
@@ -44,7 +51,13 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from quran_transcript import Aya, quran_phonetizer
 
 from backend.vad import SilenceSegmenter
-from tools.session.check import MOSHAF, check_wave
+from tools.session.check import MOSHAF
+from tools.session.timed_check import (
+    check_wave_with_timing,
+    diff_phonemes,
+    find_cut_sample,
+    find_phoneme_split_index,
+)
 from tools.session.track import load_state, log_result, save_state
 
 # How close the heard phoneme count must be to the expected count before a
@@ -104,9 +117,6 @@ async def recite(ws: WebSocket):
     segmenter = SilenceSegmenter()
     expected_duration = estimate_duration_s(sura, aya)
     last_probe_at = time.monotonic()
-    # Set after a fail: the next segment gets checked against both this
-    # ayah (retry) and the one after it (maybe they moved on anyway).
-    fallback_sura, fallback_aya = None, None
 
     try:
         while True:
@@ -133,13 +143,13 @@ async def recite(ws: WebSocket):
             if candidate is None:
                 continue
 
-            # check_wave is synchronous and CPU-bound (model inference); run
-            # it off the event loop or every other connection - including
-            # health checks and this one's own pings - freezes for its
-            # duration.
+            # check_wave_with_timing is synchronous and CPU-bound (model
+            # inference); run it off the event loop or every other
+            # connection - including health checks and this one's own
+            # pings - freezes for its duration.
             loop = asyncio.get_running_loop()
             result = await loop.run_in_executor(
-                None, check_wave, sura, aya, candidate
+                None, check_wave_with_timing, sura, aya, candidate
             )
 
             heard_len = len(result["heard_phonemes"])
@@ -171,19 +181,30 @@ async def recite(ws: WebSocket):
                     # Else: a VAD pause long enough that it's clearly not
                     # a breath - fall through and finalize anyway.
 
-            # The ayah before this one failed, so this segment is
-            # ambiguous: a retry, or they moved on anyway. Check both and
-            # take whichever one actually matches.
-            if fallback_sura is not None:
-                fallback_result = await loop.run_in_executor(
-                    None, check_wave, fallback_sura, fallback_aya, candidate
-                )
-                if len(fallback_result["mismatches"]) < len(result["mismatches"]):
-                    log_result(result, skipped=True)
-                    result = fallback_result
-                    sura, aya = fallback_sura, fallback_aya
+            # If a trailing block of heard content doesn't match anything
+            # in this ayah's own text, it almost certainly belongs to
+            # whatever's recited next. Split it off (pure string work, no
+            # new model call - re-decoding cut audio loses the surrounding
+            # context the model used the first time) and score this ayah
+            # on just its own portion.
+            split_index = find_phoneme_split_index(result)
+            cut_sample = None
+            if split_index is not None:
+                cut_sample = find_cut_sample(result, sr=segmenter.sr)
+                heard_this_ayah = result["heard_phonemes"][:split_index]
+                result = {
+                    **result,
+                    "heard_phonemes": heard_this_ayah,
+                    "mismatches": diff_phonemes(
+                        result["expected_phonemes"], heard_this_ayah
+                    ),
+                }
+                result["passed"] = len(result["mismatches"]) == 0
 
-            segmenter.finalize()
+            # Keep the matching audio tail (if any) as the start of the
+            # next segment's buffer instead of discarding it - it was
+            # already recorded, no need to hear it again live.
+            segmenter.finalize(keep_tail_from=cut_sample)
             last_probe_at = time.monotonic()
             log_result(result)
 
@@ -197,12 +218,17 @@ async def recite(ws: WebSocket):
                 }
             )
 
-            if result["passed"]:
-                fallback_sura, fallback_aya = None, None
+            # A split means the recitation already moved past this ayah,
+            # whether it passed or not - that's direct evidence, not a
+            # guess, so position advances either way. Without a split,
+            # the usual rule applies: pass advances, fail stays put so
+            # the next segment retries it.
+            if split_index is not None or result["passed"]:
                 current = Aya(sura, aya)
                 if current.is_last():
                     save_state(sura, aya)
-                    await ws.send_json({"info": "last ayah of the Quran reached"})
+                    if result["passed"]:
+                        await ws.send_json({"info": "last ayah of the Quran reached"})
                 else:
                     nxt = current.step(1).get()
                     sura, aya = nxt.sura_idx, nxt.aya_idx
@@ -210,19 +236,5 @@ async def recite(ws: WebSocket):
                     expected_duration = estimate_duration_s(sura, aya)
             else:
                 save_state(sura, aya)
-                current = Aya(sura, aya)
-                if current.is_last():
-                    fallback_sura, fallback_aya = None, None
-                else:
-                    nxt = current.step(1).get()
-                    fallback_sura, fallback_aya = nxt.sura_idx, nxt.aya_idx
-                    # Probing now has to watch for either candidate
-                    # finishing - use whichever is shorter so the start
-                    # threshold and the overdue cap don't end up based on
-                    # the wrong (possibly much longer) one.
-                    expected_duration = min(
-                        expected_duration,
-                        estimate_duration_s(fallback_sura, fallback_aya),
-                    )
     except WebSocketDisconnect:
         pass

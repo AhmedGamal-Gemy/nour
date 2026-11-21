@@ -100,31 +100,55 @@ def check_wave_with_timing(
     }
 
 
-def find_cut_sample(result: dict, sr: int = 16000) -> int | None:
-    """Given a check_wave_with_timing() result, find the audio sample where
-    a trailing, genuinely-extra block of heard content begins - the likely
-    start of the next ayah's audio bleeding into this buffer. Returns None
-    if there's no such tail (nothing to cut).
+def find_phoneme_split_index(result: dict) -> int | None:
+    """Given a check_wave_with_timing() result, find the index into
+    heard_phonemes where a trailing, genuinely-extra block begins - the
+    likely start of the next ayah's content bleeding into this buffer.
+    Returns None if there's no such tail (nothing to split off).
 
     Anchored on the start of the trailing *insert*, not the last matched
     position: a dropped ending (an expected-but-missing stretch) is a
     "delete" with no audio behind it at all, so it can't anchor a cut -
-    only heard content (equal or insert) has a real time position."""
+    only heard content (equal or insert) has a real time position, and
+    only the trailing block is safe to assume belongs to what's next
+    rather than being a genuine gap inside this ayah."""
     heard = result["heard_phonemes"]
     sm = difflib.SequenceMatcher(a=result["expected_phonemes"], b=heard)
     opcodes = sm.get_opcodes()
     if not opcodes:
         return None
-
     last_tag, _, _, last_j1, _ = opcodes[-1]
-    if last_tag != "insert":
-        return None  # nothing trailing to cut off
+    return last_j1 if last_tag == "insert" else None
 
-    phoneme_times = result["phoneme_times"]
-    if last_j1 == 0:
-        return 0
-    if last_j1 > len(phoneme_times):
+
+def find_cut_sample(result: dict, sr: int = 16000) -> int | None:
+    """Same split as find_phoneme_split_index, expressed as an audio sample
+    index instead of a phoneme index - for resetting the live audio buffer,
+    not for scoring (use split_index + diff_phonemes for that)."""
+    split_index = find_phoneme_split_index(result)
+    if split_index is None:
         return None
 
-    cut_time_s = phoneme_times[last_j1 - 1][1]
+    phoneme_times = result["phoneme_times"]
+    if split_index == 0:
+        return 0
+    if split_index > len(phoneme_times):
+        return None
+
+    cut_time_s = phoneme_times[split_index - 1][1]
     return int(cut_time_s * sr)
+
+
+def diff_phonemes(expected: str, heard: str) -> list[dict]:
+    """Pure string diff, no model call - for scoring a slice of an
+    already-decoded heard_phonemes string against a different ayah's
+    reference (e.g. the two halves either side of a phoneme split)."""
+    mismatches = []
+    sm = difflib.SequenceMatcher(a=expected, b=heard)
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            continue
+        mismatches.append(
+            {"type": tag, "expected": expected[i1:i2], "heard": heard[j1:j2]}
+        )
+    return mismatches
