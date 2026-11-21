@@ -102,26 +102,29 @@ def check_wave_with_timing(
 
 def find_cut_sample(result: dict, sr: int = 16000) -> int | None:
     """Given a check_wave_with_timing() result, find the audio sample where
-    the heard content stops matching the reference and an unexplained tail
-    begins - the likely start of the next ayah's audio bleeding into this
-    buffer. Returns None if there's no such tail (nothing to cut)."""
+    a trailing, genuinely-extra block of heard content begins - the likely
+    start of the next ayah's audio bleeding into this buffer. Returns None
+    if there's no such tail (nothing to cut).
+
+    Anchored on the start of the trailing *insert*, not the last matched
+    position: a dropped ending (an expected-but-missing stretch) is a
+    "delete" with no audio behind it at all, so it can't anchor a cut -
+    only heard content (equal or insert) has a real time position."""
     heard = result["heard_phonemes"]
     sm = difflib.SequenceMatcher(a=result["expected_phonemes"], b=heard)
     opcodes = sm.get_opcodes()
-
-    # Last matched position in `heard` across all equal-tagged blocks.
-    last_equal_end = 0
-    for tag, _, _, j1, j2 in opcodes:
-        if tag == "equal":
-            last_equal_end = max(last_equal_end, j2)
-
-    # Nothing after the last match, or it's the very end: no tail to cut.
-    if last_equal_end == 0 or last_equal_end >= len(heard):
+    if not opcodes:
         return None
+
+    last_tag, _, _, last_j1, _ = opcodes[-1]
+    if last_tag != "insert":
+        return None  # nothing trailing to cut off
 
     phoneme_times = result["phoneme_times"]
-    if last_equal_end > len(phoneme_times):
+    if last_j1 == 0:
+        return 0
+    if last_j1 > len(phoneme_times):
         return None
 
-    cut_time_s = phoneme_times[last_equal_end - 1][1]
+    cut_time_s = phoneme_times[last_j1 - 1][1]
     return int(cut_time_s * sr)
