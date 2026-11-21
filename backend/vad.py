@@ -9,7 +9,17 @@ whether what's been heard so far is actually close to the full ayah.
 
 Still not waqf-aware - it has no idea where the Uthmani text says a pause
 is expected. That's a known simplification, not the end state.
+
+The silence threshold is adaptive, not fixed: tested against a real,
+noisy, crowd-recorded clip (background ~0.03 RMS, not the near-zero floor
+of studio reciter audio) and a fixed 0.01 threshold never fired once
+during 8.6s of real recorded speech - only in artificial silence padded
+on afterward. On real mic recordings, "quiet" only makes sense relative
+to that recording's own ambient noise, not a fixed number tuned on clean
+audio.
 """
+
+from collections import deque
 
 import numpy as np
 
@@ -23,18 +33,41 @@ class SilenceSegmenter:
         min_speech_ms: int = 500,
         silence_rms_thresh: float = 0.01,
         max_silence_ms: int = 2500,
+        noise_floor_window_s: float = 3.0,
+        noise_floor_margin: float = 1.8,
     ):
         self.sr = sr
         self.frame_len = int(sr * frame_ms / 1000)
         self.silence_frames_needed = max(1, silence_ms // frame_ms)
         self.min_speech_frames = max(1, min_speech_ms // frame_ms)
         self.max_silence_frames = max(1, max_silence_ms // frame_ms)
-        self.thresh = silence_rms_thresh
+        # Absolute floor, not the whole story: see _is_silence. Keeps very
+        # clean audio (near-zero ambient noise) from becoming hypersensitive
+        # to tiny variations that aren't really "quieter than usual".
+        self.min_thresh = silence_rms_thresh
+        self.noise_floor_margin = noise_floor_margin
+        self._rms_history: deque[float] = deque(
+            maxlen=max(1, int(noise_floor_window_s * 1000 / frame_ms))
+        )
 
         self.buffer = np.zeros(0, dtype=np.float32)
         self.silence_run = 0
         self.speech_frames = 0
         self.pending = False  # a candidate cut was signaled, awaiting the caller's call
+
+    def _is_silence(self, rms: float) -> bool:
+        """A frame is "silence" if it's quieter than this recording's own
+        recent ambient noise, not just below a fixed number. Noise floor is
+        the 10th percentile of the last noise_floor_window_s of frames - low
+        enough to track the ambient floor rather than average speech level,
+        robust enough not to chase the single quietest outlier frame."""
+        self._rms_history.append(rms)
+        if len(self._rms_history) < self._rms_history.maxlen:
+            # Not enough history yet to estimate a floor - fall back to the
+            # fixed threshold rather than guessing from a handful of frames.
+            return rms < self.min_thresh
+        noise_floor = float(np.percentile(self._rms_history, 10))
+        return rms < max(self.min_thresh, noise_floor * self.noise_floor_margin)
 
     def push(self, frame: np.ndarray) -> np.ndarray | None:
         """Feed one frame of float32 samples in [-1, 1]. Returns a *candidate*
@@ -43,7 +76,7 @@ class SilenceSegmenter:
         self.buffer = np.concatenate([self.buffer, frame])
 
         rms = float(np.sqrt(np.mean(frame.astype(np.float64) ** 2)))
-        if rms < self.thresh:
+        if self._is_silence(rms):
             self.silence_run += 1
         else:
             self.silence_run = 0
