@@ -74,7 +74,9 @@ def main():
     if result["passed"]:
         print("PASS")
         current = Aya(sura, aya)
-        if current.is_last():
+        # is_last() means last ayah of its *surah*, not of the Quran -
+        # true end-of-Quran also needs sura_idx == 114 (An-Nas).
+        if current.get().sura_idx == 114 and current.is_last():
             print("That was the last ayah of the Quran.")
         else:
             nxt = current.step(1).get()
